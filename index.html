@@ -1,199 +1,782 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhammad Haseeb — Machine Learning Engineer</title>
-<meta name="description" content="Muhammad Haseeb — Machine Learning Engineer building LLM, NLP, and agentic AI systems. Researcher at Texas Tech University.">
+<title>Muhammad Haseeb — ML Engineer</title>
+<meta name="description" content="Muhammad Haseeb — Machine Learning Engineer. 3+ years building production LLM, NLP, and agentic AI systems at scale. Researcher at Texas Tech University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Apply saved theme before first paint — prevents flash -->
+<script>try{const t=localStorage.getItem('mh-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#" class="logo">Muhammad Haseeb</a>
-    <nav>
-      <a href="#about">About</a>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="site-nav">
+  <div class="w nav-inner">
+    <a href="#" class="nav-logo">Muhammad <strong>Haseeb</strong></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#work">Work</a>
       <a href="#experience">Experience</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle colour theme">
+      <svg id="themeIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <!-- moon (shown in dark mode — click to go light) -->
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <span id="themeLabel">Light</span>
+    </button>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container hero-inner">
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<main id="main" tabindex="-1">
+
+<section class="hero" aria-labelledby="intro-title">
+  <div class="hero-circuit" aria-hidden="true">
+    <svg viewBox="0 0 1440 1040" preserveAspectRatio="none" fill="none">
+      <g class="circuit-base">
+        <path d="M0 34H750Q804 34 804 88V878Q804 920 848 920H1440"/>
+        <path d="M1440 112H1398Q1374 112 1374 140V978H952"/>
+        <path d="M0 942H28Q46 942 46 918V176Q46 150 20 150H0"/>
+      </g>
+      <g class="circuit-traces">
+        <path class="circuit-trace" pathLength="100" d="M0 34H750Q804 34 804 88V878Q804 920 848 920H1440"/>
+        <path class="circuit-trace circuit-trace-secondary" pathLength="100" d="M1440 112H1398Q1374 112 1374 140V978H952"/>
+        <path class="circuit-trace circuit-trace-third" pathLength="100" d="M0 942H28Q46 942 46 918V176Q46 150 20 150H0"/>
+      </g>
+      <g class="circuit-ports"><circle cx="804" cy="88" r="4"/><circle cx="804" cy="878" r="4"/><circle cx="1374" cy="140" r="4"/><circle cx="46" cy="918" r="4"/></g>
+    </svg>
+  </div>
+
+  <div class="w hero-inner">
     <div class="hero-text">
-      <p class="eyebrow">Machine Learning Engineer</p>
-      <h1>LLM, NLP &amp; Agentic AI Systems</h1>
-      <p class="hero-sub">
-        Machine Learning Engineer with 3+ years of industry experience shipping production LLM, NLP, and agentic AI
-        systems at scale. Research background in open-source LLM evaluation and automated feedback generation,
-        first author of two accepted papers at WWW&nbsp;'26 and BEA&nbsp;2026&nbsp;@&nbsp;ACL.
-      </p>
-      <div class="hero-links">
-        <a class="btn btn-primary" href="assets/resume.pdf" target="_blank" rel="noopener">View Resume</a>
-        <a class="btn" href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2 1 8l11 6 9-4.91V17h2V8L12 2zM5 13.18v4.16C5 19.7 8.13 21.5 12 21.5s7-1.8 7-4.16v-4.16l-7 3.82-7-3.82z"/></svg>
-          Google Scholar
+      <h1 id="intro-title"><span class="hero-title-line">From models</span><span class="hero-title-line">to <em>production.</em></span></h1>
+      <p class="hero-role">Muhammad Haseeb <span aria-hidden="true">/</span> Machine Learning Engineer</p>
+      <p class="hero-sub">3+ years building production ML, NLP and agentic AI systems — from feature stores and Kubernetes services to fine-tuned LLMs and RAG pipelines.</p>
+      <p class="hero-bio">My background spans production ML at DEVSINC and LLM research at Texas Tech University. <a href="#about">More about me</a></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#work">See the work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        <a class="btn btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">View résumé <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      </div>
+
+    </div>
+    <aside class="hero-evidence" aria-label="Selected production results and research">
+      <div class="hero-profile">
+        <img src="assets/photo.jpeg" alt="Muhammad Haseeb" width="96" height="112" fetchpriority="high">
+        <div><h2>Production work.<br>Research depth.</h2><p>ML engineering &amp; applied research</p></div>
+      </div>
+      <div class="hero-projects">
+        <a class="hero-project hero-project-health" href="#healthcare-platform">
+          <span class="hero-project-title">Healthcare ML platform <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-project-impact">Deployment cycle: 8 to 4 weeks</span>
+          <span class="hero-project-stack">Azure Databricks · MLflow · PySpark</span>
+        </a>
+        <a class="hero-project hero-project-cloud" href="#cloud-platform">
+          <span class="hero-project-title">Cloud DevOps platform <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-project-impact">40+ microservices · 99.7% uptime</span>
+          <span class="hero-project-stack">GCP · Kubernetes · Terraform</span>
+        </a>
+        <a class="hero-project hero-project-compliance" href="#smartcompliance">
+          <span class="hero-project-title">SmartCompliance <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-project-impact">80% less manual review time</span>
+          <span class="hero-project-stack">Document AI · Hybrid retrieval · LLMs</span>
         </a>
       </div>
+
+      <div class="hero-papers" aria-label="Selected research publications">
+        <a class="hero-paper" href="#paper-www">
+          <span class="hero-paper-venue">WWW ’26 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <strong>Unified vs. multi-agent feedback</strong>
+          <span>First author · Programming assessment</span>
+        </a>
+        <a class="hero-paper" href="#paper-bea">
+          <span class="hero-paper-venue">BEA 2026 @ ACL <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <strong>Cross-domain LLM evaluation</strong>
+          <span>First author · Programming, math &amp; writing</span>
+        </a>
+      </div>
+    </aside>
+    <div class="hero-credentials">
+      <p class="hero-research">First-author research at <a href="#research">WWW ’26 and BEA 2026 @ ACL</a>.</p>
+      <div class="hero-socials" aria-label="Professional profiles">
+        <a href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?view_op=list_works&amp;hl=en&amp;user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <button class="motion-toggle" id="motionToggle" data-motion-control type="button" aria-pressed="true" aria-label="Pause background animation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+          <span>Pause background</span>
+        </button>
+      </div>
     </div>
-    <div class="hero-photo">
-      <img src="assets/photo.jpeg" alt="Muhammad Haseeb">
+  </div>
+  <div class="w hero-focus" aria-label="Core engineering focus">
+    <span>LLMs &amp; agentic systems</span><span>Production ML platforms</span><span>Cloud infrastructure &amp; MLOps</span>
+    <a href="#skills">Explore the toolkit <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WORK
+     ============================================================ -->
+<section id="work" class="sec">
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">Systems I’ve shipped</h2><p class="section-note">Architecture, implementation, and measurable impact.</p>
+    </div>
+
+    <div class="work-cards">
+
+      <!-- ── Healthcare ML Platform (AMERI) ── -->
+      <article class="cs-card" id="healthcare-platform">
+        <h3 class="cs-title">Healthcare ML Platform</h3>
+        <div class="cs-meta">
+          <span class="cs-domain">Healthcare · Insurance</span>
+          <span class="cs-year">2022 – 2024 · DEVSINC</span>
+        </div>
+
+        <p class="cs-desc">
+          Unified feature store and ML pipeline infrastructure serving risk-scoring models across a large healthcare insurance carrier — with subgroup equity analysis, Unity Catalog data lineage, and champion–challenger validation built in for regulatory auditability.
+        </p>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <span class="cs-mnum">4<small> wks</small></span>
+            <span class="cs-mlbl">Deployment Time</span>
+            <span class="cs-mchg">↓ from 8 weeks</span>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-g">50<small>%</small></span>
+            <span class="cs-mlbl">Faster Cycle Time</span>
+            <span class="cs-mchg">pipeline deployment</span>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-mnum">3</span>
+            <span class="cs-mlbl">Auditability Layers</span>
+            <span class="cs-mchg">lineage · registry · equity</span>
+          </div>
+        </div>
+        <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <div class="cs-arch-wrap">
+          <p class="cs-arch-label">System architecture</p>
+          <div class="arch-live arch-live-healthcare">
+            <iframe src="assets/healthcare_ml_architecture.html?preview=1" title="Animated Healthcare ML platform architecture" loading="lazy"></iframe>
+          </div>
+          <details class="arch-text" open>
+            <summary>Read architecture summary</summary>
+          <div class="arch-overview" role="group" aria-label="Healthcare ML platform architecture">
+            <div class="arch-phases"><div class="arch-phase"><h4>Data foundation</h4><ol class="arch-flow"><li class="arch-node"><strong>EHR data sources</strong><span>Clinical records, encounters, labs and diagnoses</span></li><li class="arch-node"><strong>Azure Databricks</strong><span>PySpark ETL: normalize, validate and join</span></li><li class="arch-node"><strong>Delta Lake</strong><span>Versioned features with Unity Catalog governance</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Model lifecycle</h4><ol class="arch-flow"><li class="arch-node"><strong>MLflow</strong><span>Experiment tracking and model registry</span></li><li class="arch-node"><strong>XGBoost risk model</strong><span>Versioned clinical risk candidates</span></li><li class="arch-node"><strong>Subgroup evaluation</strong><span>Performance across demographic and clinical cohorts</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Validation &amp; serving</h4><ol class="arch-flow"><li class="arch-node"><strong>Champion–challenger</strong><span>Compare candidates against quality and equity checks</span></li><li class="arch-node"><strong>Batch inference</strong><span>Produce clinical risk scores</span></li><li class="arch-node"><strong>Audit report</strong><span>Reproducible results and supporting evidence</span></li></ol></div></div>
+            <p class="arch-note">Traceability across the lifecycle: Unity Catalog lineage, MLflow provenance and subgroup equity reports.</p>
+          </div>
+          </details>
+          <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <aside class="project-note" aria-labelledby="note-healthcare">
+            <h4 id="note-healthcare">Trace the score back</h4>
+            <p>Batch inference produces scores in runs rather than serving individual live requests. Unity Catalog lineage, MLflow versions and subgroup reports keep the data, model and equity checks visible together.</p>
+          </aside>
+          <button class="cs-arch-expand" onclick="openArchModal('assets/healthcare_ml_architecture.html','Healthcare ML Platform Architecture')" aria-label="View detailed Healthcare ML platform architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View detailed architecture
+          </button>
+        </div>
+        <div class="cs-foot">
+          <div class="cs-chips">
+            <span class="chip">Azure Databricks</span>
+            <span class="chip">Delta Lake</span>
+            <span class="chip">MLflow</span>
+            <span class="chip">XGBoost</span>
+            <span class="chip">PySpark</span>
+            <span class="chip">Unity Catalog</span>
+          </div>
+          <a href="assets/healthcare_ml_architecture.html" class="cs-cta">
+            Explore architecture
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- ── Cloud DevOps Platform (IMX) ── -->
+      <article class="cs-card cs-card-g" id="cloud-platform">
+        <h3 class="cs-title">Cloud DevOps Platform</h3>
+        <div class="cs-meta">
+          <span class="cs-domain cs-domain-g">DevOps · GCP</span>
+          <span class="cs-year">2022 – 2024 · DEVSINC</span>
+        </div>
+
+        <p class="cs-desc">
+          CI/CD and observability platform managing 40+ microservices on GCP Kubernetes — Terraform-provisioned infrastructure, Prometheus and Grafana monitoring, and runbook-guided incident routing achieving 99.7% uptime.
+        </p>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-g">99.7<small>%</small></span>
+            <span class="cs-mlbl">Uptime</span>
+            <span class="cs-mchg">across 40+ services</span>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-g">60<small>%</small></span>
+            <span class="cs-mlbl">Faster Response</span>
+            <span class="cs-mchg">incident resolution</span>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-g">40<small>+</small></span>
+            <span class="cs-mlbl">Microservices</span>
+            <span class="cs-mchg">on GCP Kubernetes</span>
+          </div>
+        </div>
+        <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <div class="cs-arch-wrap">
+          <p class="cs-arch-label">System architecture</p>
+          <div class="arch-live arch-live-devops">
+            <iframe src="assets/devops_architecture.html?preview=1" title="Animated Cloud DevOps platform architecture" loading="lazy"></iframe>
+          </div>
+          <details class="arch-text" open>
+            <summary>Read architecture summary</summary>
+          <div class="arch-overview" role="group" aria-label="Cloud DevOps platform architecture">
+            <div class="arch-phases"><div class="arch-phase"><h4>Build &amp; deploy</h4><ol class="arch-flow"><li class="arch-node"><strong>GitHub Actions</strong><span>Continuous integration and delivery</span></li><li class="arch-node"><strong>Docker</strong><span>Build, tag and publish container images</span></li><li class="arch-node"><strong>Helm</strong><span>Deploy application releases to Kubernetes</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Runtime &amp; metrics</h4><ol class="arch-flow"><li class="arch-node"><strong>GCP Kubernetes</strong><span>40+ containerized microservices</span></li><li class="arch-node"><strong>Managed Prometheus</strong><span>Collectors and exporters capture workload metrics</span></li><li class="arch-node"><strong>Rule evaluator</strong><span>Evaluate thresholds and alert conditions</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Observe &amp; respond</h4><div class="arch-branches"><div><p class="arch-branch-label">Metrics path</p><ol class="arch-flow" aria-label="Metrics visualization"><li class="arch-node"><strong>Monarch DB</strong><span>Managed time-series storage</span></li><li class="arch-node"><strong>Dashboards</strong><span>Prometheus UI, Grafana or Cloud Monitoring</span></li></ol></div><div><p class="arch-branch-label">Alert path</p><ol class="arch-flow" aria-label="Incident response"><li class="arch-node"><strong>Alertmanager</strong><span>Route firing alerts</span></li><li class="arch-node"><strong>Slack &amp; runbooks</strong><span>Triage, internal resolution or owner escalation</span></li></ol></div></div></div></div>
+            <p class="arch-note">Provisioning: Terraform manages GCP infrastructure. Managed Prometheus feeds Monarch for dashboards; its rule evaluator feeds Alertmanager for incident response.</p>
+          </div>
+          </details>
+          <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <aside class="project-note" aria-labelledby="note-devops">
+            <h4 id="note-devops">From a signal to an owner</h4>
+            <p>Dashboards show what changed; alert routing determines who acts. The metrics path feeds Monarch and dashboards, while evaluated rules route through Alertmanager to Slack and runbooks. Both paths matter for incident response.</p>
+          </aside>
+          <button class="cs-arch-expand" onclick="openArchModal('assets/devops_architecture.html','Cloud DevOps Platform Architecture')" aria-label="View detailed Cloud DevOps platform architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View detailed architecture
+          </button>
+        </div>
+        <div class="cs-foot">
+          <div class="cs-chips">
+            <span class="chip">GCP</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Helm</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">Prometheus</span>
+            <span class="chip">Grafana</span>
+          </div>
+          <span class="cs-wip">Case study in progress</span>
+        </div>
+      </article>
+
+      <!-- ── SmartCompliance (Brians) ── -->
+      <article class="cs-card cs-card-o" id="smartcompliance">
+        <h3 class="cs-title">SmartCompliance</h3>
+        <div class="cs-meta">
+          <span class="cs-domain cs-domain-o">Document AI · Construction</span>
+          <span class="cs-year">2022 – 2024 · DEVSINC</span>
+        </div>
+
+        <p class="cs-desc">
+          End-to-end document intelligence pipeline that reads contractor proposals, retrieves relevant sections via hybrid vector search, and generates evidence-grounded compliance verdicts — cutting manual review time by 80%.
+        </p>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-o">80<small>%</small></span>
+            <span class="cs-mlbl">Faster Reviews</span>
+            <span class="cs-mchg">vendor proposals</span>
+          </div>
+          <div class="cs-metric">
+            <span class="cs-mnum cs-mnum-o">3</span>
+            <span class="cs-mlbl">Analysis Levels</span>
+            <span class="cs-mchg">text · table · image</span>
+          </div>
+        </div>
+        <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <div class="cs-arch-wrap">
+          <p class="cs-arch-label">System architecture</p>
+          <div class="arch-live arch-live-construction">
+            <iframe src="assets/construction_compliance_architecture.html?preview=1" title="Animated SmartCompliance architecture" loading="lazy"></iframe>
+          </div>
+          <details class="arch-text" open>
+            <summary>Read architecture summary</summary>
+          <div class="arch-overview" role="group" aria-label="SmartCompliance architecture">
+            <div class="arch-phases"><div class="arch-phase"><h4>Read the proposal</h4><ol class="arch-flow"><li class="arch-node"><strong>Proposal PDF</strong><span>Unstructured contractor submissions</span></li><li class="arch-node"><strong>Azure Document Intelligence</strong><span>Extract text, tables and document sections</span></li><li class="arch-node"><strong>Text chunking</strong><span>Prepare sections for retrieval</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Retrieve evidence</h4><ol class="arch-flow"><li class="arch-node"><strong>BM25 + embeddings</strong><span>Parallel sparse keyword and dense vector retrieval</span></li><li class="arch-node"><strong>Milvus</strong><span>Hybrid search over indexed proposal content</span></li></ol><p class="arch-support">Dense vectors: OpenAI text-embedding-3-large.</p><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Evaluate &amp; report</h4><ol class="arch-flow"><li class="arch-node"><strong>LLM comparison</strong><span>Compare retrieved evidence with design requirements</span></li><li class="arch-node"><strong>Compliance verdict</strong><span>Evidence-grounded pass or fail decisions</span></li><li class="arch-node"><strong>Excel report</strong><span>Auditable decisions with supporting evidence</span></li></ol></div></div>
+            <p class="arch-note">Review context: 250–300 page proposals against 20–25 page design specifications for contractor shortlisting.</p>
+          </div>
+          </details>
+          <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <aside class="project-note" aria-labelledby="note-construction">
+            <h4 id="note-construction">Retrieve terms and meaning</h4>
+            <p>BM25 supports exact keyword matches; embeddings retrieve related wording. The hybrid index brings both into the comparison step. Supporting evidence in the Excel report gives a reviewer something to inspect beyond a pass or fail.</p>
+          </aside>
+          <button class="cs-arch-expand" onclick="openArchModal('assets/construction_compliance_architecture.html','SmartCompliance Architecture')" aria-label="View detailed SmartCompliance architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View detailed architecture
+          </button>
+        </div>
+        <div class="cs-foot">
+          <div class="cs-chips">
+            <span class="chip">Azure Document Intelligence</span>
+            <span class="chip">Milvus</span>
+            <span class="chip">GPT-4o-mini</span>
+            <span class="chip">BM25</span>
+            <span class="chip">text-embedding-3-large</span>
+            <span class="chip">FastAPI</span>
+          </div>
+          <span class="cs-wip">Case study in progress</span>
+        </div>
+      </article>
+
+    </div><!-- /.work-cards -->
+
+    <!-- Smaller supplementary projects -->
+    <p class="proj-also">Other projects</p>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <h3>HealthQuery Intelligence</h3>
+        <p>Conversational AI system for natural language querying over a cloud-hosted medical dataset — intent classification routing queries across specialised clinical pipelines.</p>
+      </div>
+      <div class="proj-card">
+        <h3>TradeHub Platform</h3>
+        <p>Microservices architecture for a medical-instruments trading platform, managing the complete trade flow from order-making to clearing within a GCP cluster.</p>
+      </div>
+      <div class="proj-card">
+        <h3>Quantum ML + RAG Clinical AI</h3>
+        <p>Clinical decision support system combining Quantum ML (MIMIC dataset) with a RAG pipeline over PubMed for evidence-based case retrieval — presented at Texas First Quantum Summit.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+     ============================================================ -->
+<section id="experience" class="sec journey-section" data-journey>
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">Production experience</h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-entry">
+        <div class="exp-meta">
+          <p class="exp-co">Texas Tech University</p>
+          <p class="exp-role">Graduate Research Assistant</p>
+          <p class="exp-date">March 2025 – Present</p>
+          <p class="exp-loc">Lubbock, TX</p>
+          <p class="exp-sub">TxDOT Transportation Safety Research</p>
+        </div>
+        <ul class="exp-bullets">
+          <li>Conducting applied research on crash causation analysis using statistical and GenAI-integrated frameworks; built a multi-agent NLP chatbot with intent classification (local LLM) routing queries across four specialised pipelines.</li>
+          <li>Engineered an agentic report generation system using LangChain and GenAI for automated PDF, PPT, and poster creation, integrated into a custom React analytics dashboard.</li>
+          <li>Designed automated ETL pipelines processing 100K+ district crash records with agentic RAG for natural language querying across 5+ TxDOT districts.</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-meta">
+          <p class="exp-co">DEVSINC</p>
+          <p class="exp-role">Senior Software Engineer</p>
+          <p class="exp-date">Jan 2022 – Jan 2025</p>
+          <p class="exp-loc">Islamabad, Pakistan</p>
+        </div>
+        <ul class="exp-bullets">
+          <li>Led AI/ML projects automating construction design requirements using NLP and Generative AI, improving vendor proposal accuracy by 80% while supervising a team of 3 engineers to deliver production solutions.</li>
+          <li>Architected MLOps infrastructure managing Kubernetes clusters on GCP (40+ microservices), implementing monitoring with Prometheus and Grafana, achieving 99.7% uptime and reducing incident response time by 60%.</li>
+          <li>Developed a healthcare navigation chatbot using OpenAI and open-source LLMs with LoRA fine-tuning and RAG pipelines, improving domain accuracy from 74% to 88% on disease trends and treatment datasets.</li>
+          <li>Spearheaded Azure Databricks Feature Store adoption to eliminate redundant feature engineering across teams, enabling feature reuse and cutting model deployment time from 8 weeks to 4 weeks.</li>
+          <li>Built production ML pipelines with automated data and model drift monitoring, champion–challenger validation, batch inference, and scheduled retraining workflows, reducing deployment cycle time by 50%.</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
 
-<main class="container">
+<!-- ============================================================
+     RESEARCH
+     ============================================================ -->
+<!-- Lightbox overlay -->
+<dialog class="fig-overlay" id="figOverlay" aria-label="Figure enlarged view">
+  <button class="fig-close" id="figClose" aria-label="Close enlarged figure" autofocus>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <img id="figImg" alt="">
+  <div class="fig-caption" id="figCaption"></div>
+  <a class="fig-original" id="figOriginal" target="_blank" rel="noopener">Open original image</a>
+</dialog>
 
-  <section id="about" class="section">
-    <h2>About</h2>
-    <p>
-      I build conversational AI with intent recognition and multi-agent orchestration, RAG pipelines, LoRA
-      fine-tuned models, and MLOps infrastructure serving 40+ microservices at 99.7% uptime. Currently a Graduate
-      Research Assistant at Texas Tech University, working on AI-driven feedback and evaluation systems for
-      personalized learning using LLMs, across programming, math, and writing domains.
-    </p>
-  </section>
-
-  <section id="experience" class="section">
-    <h2>Experience</h2>
-
-    <div class="entry">
-      <div class="entry-head">
-        <h3>Graduate Assistant (Research), Civil Engineering Dept, Texas Tech University</h3>
-        <span class="entry-date">March 2025 – Present</span>
-      </div>
-      <p class="entry-sub">TxDOT-Funded Transportation Safety Research Project</p>
-      <ul>
-        <li>Conducting applied research on crash causation analysis using statistical and GenAI-integrated frameworks; built a multi-agent NLP chatbot with intent classification (local LLM) routing queries across four specialized pipelines.</li>
-        <li>Engineered an agentic report generation system using LangChain and GenAI for automated PDF, PPT, and poster creation, integrated into a custom React analytics dashboard.</li>
-        <li>Designed automated ETL pipelines processing 100K+ district crash records with agentic RAG for natural language querying across 5+ TxDOT districts.</li>
-      </ul>
+<section id="research" class="sec journey-section" data-journey>
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">Research behind the work</h2>
     </div>
 
-    <div class="entry">
-      <div class="entry-head">
-        <h3>DEVSINC, Islamabad, Pakistan — Senior Software Engineer</h3>
-        <span class="entry-date">Jan 2022 – Jan 2025</span>
+    <!-- Paper 1 — WWW Companion '26 -->
+    <div class="paper-card" id="paper-www">
+      <div class="paper-card-body">
+        <div>
+          <div class="pub-venue">
+            WWW Companion '26 · Dubai, UAE
+            <span class="pub-badge">First Author</span>
+          </div>
+          <p class="pub-title">From Code to Rubrics: A Multimodal Evaluation of LLM Systems for Automated Feedback Generation</p>
+          <p class="pub-authors">Haseeb, M., Amjad, A. I., Amjad, M., &amp; Sheng, V. S. &mdash; <em>Companion Proceedings of The ACM Web Conference 2026</em>, April 13&ndash;17, Dubai. ACM.</p>
+          <p class="paper-abstract">Compared unified vs. multi-agent LLM prompting (Qwen2.5-Coder, GPT-OSS, DeepSeek-R1, Llama-3.3) for automated programming feedback on 57 student submissions. Showed single-role prompts outperform tightly-coupled agent pipelines for introductory tasks; introduced a J1-style thinking judge that substantially improved automated evaluation agreement with human annotators.</p>
+          <div class="paper-links">
+            <a class="link-inline" href="https://doi.org/10.1145/3774905.3795458" target="_blank" rel="noopener">
+              Read paper
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a class="link-inline" href="https://github.com/ed-grading/programming_feedback_generation" target="_blank" rel="noopener">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <figure class="paper-thumb"><button class="paper-image-button" type="button" onclick="openFig('assets/paper-www-pipeline.png','Unified vs. Multi-Agent Pipeline Architecture — Fig. A.5')" aria-label="Enlarge unified and multi-agent pipeline figure">
+          <img src="assets/paper-www-pipeline.png" alt="Unified vs Multi-Agent Pipeline Architecture" width="774" height="400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Unified vs. multi-agent pipeline <span>Enlarge figure</span></figcaption>
+        </figure>
       </div>
-      <ul>
-        <li>Led AI/ML projects automating construction design requirements using NLP and Generative AI, improving vendor proposal accuracy by 80% while supervising a team of 3 engineers.</li>
-        <li>Architected MLOps infrastructure managing Kubernetes clusters on GCP (40+ microservices), achieving 99.7% uptime and reducing incident response time by 60%.</li>
-        <li>Developed a conversational AI system using open-source LLMs with LoRA fine-tuning and RAG pipelines, improving accuracy from 74% to 88% on disease trends and treatment datasets.</li>
-        <li>Spearheaded Azure Databricks feature store adoption, reducing model deployment time from 8 weeks to 4 weeks.</li>
-      </ul>
     </div>
-  </section>
 
-  <section id="publications" class="section">
-    <h2>Publications</h2>
-    <div class="entry">
-      <p><strong>Haseeb, M., et al.</strong> &ldquo;Toward Cross-Domain Automated Feedback: A Comparative Evaluation of Open-Source Models across Diverse Student Assessment Types.&rdquo; 21st Workshop on Innovative Use of NLP for Building Educational Applications (BEA 2026) @ ACL 2026. <span class="tag">Accepted</span></p>
-    </div>
-    <div class="entry">
-      <p><strong>Haseeb, M., Amjad, A. I., Amjad, M., &amp; Sheng, V. S.</strong> &ldquo;From Code to Rubrics: A Multimodal Evaluation of LLM Systems for Automated Feedback Generation.&rdquo; Companion Proceedings of the ACM Web Conference 2026 (WWW Companion '26), Dubai, UAE. ACM. <span class="tag">Accepted</span></p>
-    </div>
-    <div class="entry">
-      <div class="entry-head">
-        <h3>Master's Thesis: AI-Driven Feedback and Evaluation Systems for Personalized Learning using LLMs</h3>
+    <!-- Paper 2 — BEA 2026 @ ACL -->
+    <div class="paper-card" id="paper-bea">
+      <div class="paper-card-body">
+        <div>
+          <div class="pub-venue">
+            BEA 2026 @ ACL · San Diego, CA
+            <span class="pub-badge">Presented In Person</span>
+          </div>
+          <p class="pub-title">Toward Cross-Domain Automated Feedback: A Comparative Evaluation of Open-Source Models across Diverse Student Assessment Types</p>
+          <p class="pub-authors">Haseeb, M., et al. &mdash; <em>21st Workshop on Innovative Use of NLP for Building Educational Applications</em>, ACL 2026.</p>
+          <p class="paper-abstract">Evaluated Qwen 3.5 and DeepSeek R1 for automated feedback generation across three educational domains — programming, writing, and mathematics — using unified and multi-agent prompting strategies. Key finding: no single open-source model dominates all domains; DeepSeek R1 excels at structured tasks while Qwen 3.5 leads on open-ended ones; multi-agent prompting actively degrades performance on tasks requiring coherent reasoning chains.</p>
+          <div class="paper-links">
+            <a class="link-inline" href="https://aclanthology.org/2026.bea-1.64/" target="_blank" rel="noopener">
+              ACL Anthology
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a class="link-inline" href="assets/paper-bea-poster.pdf" target="_blank" rel="noopener">
+              View poster
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <figure class="paper-thumb"><button class="paper-image-button" type="button" onclick="openFig('assets/paper-bea-photo.jpg','Presenting at BEA 2026 @ ACL San Diego')" aria-label="Enlarge ACL 2026 presentation photo">
+          <img src="assets/paper-bea-photo.jpg" alt="Presenting BEA 2026 poster at ACL San Diego" width="3002" height="3264" loading="lazy" decoding="async">
+          </button>
+          <figcaption>ACL 2026 · San Diego <span>View full photo</span></figcaption>
+        </figure>
       </div>
-      <p>Designing and evaluating agentic LLM architectures for automated student feedback generation across programming, math, and writing; building open-source, locally deployable tools as alternatives to proprietary APIs for under-resourced institutions.</p>
     </div>
-    <div class="entry">
-      <div class="entry-head">
-        <h3>Conference Poster Presentation, Texas A&amp;M University</h3>
-        <span class="entry-date">Sept 2025</span>
-      </div>
-      <p>Built and presented a clinical AI system combining Quantum ML (trained on MIMIC dataset) and a RAG pipeline over PubMed for evidence-based case retrieval, presented at the Texas First Quantum Summit.</p>
-      <p><a class="link-inline" href="assets/Quantum Summit Poster.pdf" target="_blank" rel="noopener">View Poster (PDF) &rarr;</a></p>
-    </div>
-  </section>
 
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>HealthQuery Intelligence</h3>
-        <p>Conversational AI system for natural language querying over a cloud-hosted medical dataset, enabling users to extract insights from open-ended clinical queries.</p>
-      </div>
-      <div class="card">
-        <h3>SmartCompliance</h3>
-        <p>AI-powered system using Generative AI and NLP to compare proposals against compliance standards, cutting review time by 80% and improving accuracy.</p>
-      </div>
-      <div class="card">
-        <h3>TradeHub Platform</h3>
-        <p>Microservices for a trading platform managing the complete trade flow from order-making to clearing houses within a GCP cluster.</p>
-      </div>
+    <div class="thesis-entry">
+      <p class="thesis-label">Master's Thesis — In Progress</p>
+      <p class="thesis-title">AI-Driven Feedback and Evaluation Systems for Personalised Learning using LLMs</p>
+      <p class="thesis-desc">Designing and evaluating agentic LLM architectures for automated student feedback generation across programming, math, and writing — building open-source, locally deployable tools as alternatives to proprietary APIs for under-resourced institutions.</p>
     </div>
-  </section>
 
-  <section id="skills" class="section">
-    <h2>Skills</h2>
+    <div class="poster-entry">
+      <div class="poster-left">
+        <h4>Conference Poster — Texas Quantum Summit</h4>
+        <p class="poster-date">Texas A&amp;M · Sept 2025 &nbsp;&nbsp;|&nbsp;&nbsp; UT Dallas · 2026</p>
+        <p>QML-RAG: a quantum-classical pipeline combining MIMIC-III patient triage via 8-qubit QNN with a RAG system over PubMed for evidence-based clinical decision support.</p>
+        <div class="paper-links">
+          <a class="link-inline" href="assets/Quantum Summit Poster.pdf" target="_blank" rel="noopener">
+            Poster 2025
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a class="link-inline" href="assets/quantum-summit-2026-poster.pdf" target="_blank" rel="noopener">
+            Poster 2026
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <figure class="paper-thumb"><button class="paper-image-button" type="button" onclick="openFig('assets/quantum-summit-2026-photo.jpg','UT Dallas Quantum Summit 2026 — QML-RAG')" aria-label="Enlarge Quantum Summit presentation photo">
+        <img src="assets/quantum-summit-2026-photo.jpg" alt="Presenting at UT Dallas Quantum Summit 2026" width="768" height="1024" loading="lazy" decoding="async">
+        </button>
+        <figcaption>UT Dallas · 2026 <span>View full photo</span></figcaption>
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
+<section id="skills" class="sec journey-section" data-journey>
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">Technical toolkit</h2>
+    </div>
     <div class="skills-grid">
-      <div>
-        <h4>AI/ML</h4>
-        <p>PyTorch, TensorFlow, Scikit-learn, LangChain, LangGraph, AutoGen, Hugging Face, LLMs, RAG, LoRA, Unsloth, vLLM, VLMs, Prompt Engineering, Agentic Workflows</p>
+      <div class="skill-cat">
+        <h4>AI / ML</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">LangChain</span>
+          <span class="skill-tag">LangGraph</span>
+          <span class="skill-tag">AutoGen</span>
+          <span class="skill-tag">Hugging Face</span>
+          <span class="skill-tag">LLMs</span>
+          <span class="skill-tag">RAG</span>
+          <span class="skill-tag">LoRA</span>
+          <span class="skill-tag">Unsloth</span>
+          <span class="skill-tag">vLLM</span>
+          <span class="skill-tag">VLMs</span>
+          <span class="skill-tag">YOLOv5</span>
+          <span class="skill-tag">Agentic Workflows</span>
+        </div>
       </div>
-      <div>
+      <div class="skill-cat">
         <h4>MLOps</h4>
-        <p>Docker, Kubernetes, Helm, MLflow, Model Monitoring, CI/CD, GitHub Actions, Azure Databricks, Airflow, Grafana, Prometheus</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Helm</span>
+          <span class="skill-tag">MLflow</span>
+          <span class="skill-tag">Feature Store</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Azure Databricks</span>
+          <span class="skill-tag">Airflow</span>
+          <span class="skill-tag">Grafana</span>
+          <span class="skill-tag">Prometheus</span>
+          <span class="skill-tag">Terraform</span>
+        </div>
       </div>
-      <div>
+      <div class="skill-cat">
         <h4>Cloud &amp; Data</h4>
-        <p>GCP, AWS, Azure, PostgreSQL, MySQL, MongoDB, Pandas, PySpark, Delta Lake, REST APIs</p>
+        <div class="skill-tags">
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">Delta Lake</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">REST APIs</span>
+        </div>
       </div>
-      <div>
+      <div class="skill-cat">
         <h4>Programming</h4>
-        <p>Python, JavaScript, C++, FastAPI, Node.js, React</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">React</span>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="education" class="section">
-    <h2>Education</h2>
-    <div class="entry">
-      <div class="entry-head">
-        <h3>Texas Tech University, Lubbock, Texas</h3>
-        <span class="entry-date">Jan 2025 – Jul 2026</span>
-      </div>
-      <p class="entry-sub">Master's in Computer Science · CGPA: 4.0/4.0</p>
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" class="sec journey-section" data-journey>
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">About</h2>
     </div>
-    <div class="entry">
-      <div class="entry-head">
-        <h3>FAST NUCES, Islamabad, Pakistan</h3>
-        <span class="entry-date">Aug 2018 – May 2022</span>
-      </div>
-      <p class="entry-sub">Bachelor's in Computer Science · CGPA: 3.40/4.0</p>
+    <p class="about-text">
+      I build conversational AI with intent recognition and multi-agent orchestration, RAG pipelines,
+      LoRA fine-tuned models, and MLOps infrastructure serving 40+ microservices at 99.7% uptime.
+      At DEVSINC I led ML engineering across healthcare insurance, construction-tech, and cloud DevOps
+      engagements — including an Azure Databricks feature store adoption that cut model deployment
+      time in half, and a GCP Kubernetes platform that became the backbone for a large client's
+      production ML workloads. I'm now a Graduate Research Assistant at Texas Tech University, working
+      on AI-driven feedback and evaluation systems for personalised learning using LLMs across
+      programming, math, and writing domains — with two papers accepted at top-tier venues.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDUCATION
+     ============================================================ -->
+<section id="education" class="sec journey-section" data-journey>
+  <div class="w">
+    <div class="sec-hd">
+      <h2 class="sec-title">Education</h2>
     </div>
-  </section>
+    <div class="edu-list">
+      <div class="edu-entry">
+        <div>
+          <p class="edu-school">Texas Tech University, Lubbock, TX</p>
+          <p class="edu-degree">Master's in Computer Science</p>
+          <p class="edu-gpa">CGPA: 4.0 / 4.0</p>
+        </div>
+        <span class="edu-date">Jan 2025 – Jul 2026</span>
+      </div>
+      <div class="edu-entry">
+        <div>
+          <p class="edu-school">FAST NUCES, Islamabad, Pakistan</p>
+          <p class="edu-degree">Bachelor's in Computer Science</p>
+          <p class="edu-gpa">CGPA: 3.40 / 4.0</p>
+        </div>
+        <span class="edu-date">Aug 2018 – May 2022</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 </main>
 
-<footer id="contact" class="site-footer">
-  <div class="container">
-    <h2>Get in touch</h2>
-    <p>Lubbock, Texas</p>
-    <div class="hero-links">
+<!-- ============================================================
+     FOOTER / CONTACT
+     ============================================================ -->
+<!-- Architecture modal -->
+<dialog class="arch-modal-overlay" id="archModal" aria-labelledby="archModalTitle">
+  <div class="arch-modal-inner">
+    <div class="arch-modal-bar">
+      <span class="arch-modal-title" id="archModalTitle"></span>
+      <div class="arch-modal-actions"><a id="archOpenPage" target="_blank" rel="noopener">Open separately ↗</a>
+      <button class="arch-modal-close" id="archModalClose" autofocus>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        Close
+      </button></div>
+    </div>
+    <div class="arch-modal-frame">
+      <iframe id="archModalFrame" title="Architecture diagram" allowfullscreen></iframe>
+    </div>
+  </div>
+</dialog>
+
+<footer id="contact" class="site-footer journey-section" data-journey>
+  <div class="w">
+    <h2 class="footer-title">Let’s talk ML engineering.</h2>
+    <p class="footer-sub">Lubbock, Texas</p>
+    <div class="footer-links">
       <a class="btn btn-primary" href="mailto:haseebmuhammad029@gmail.com">haseebmuhammad029@gmail.com</a>
       <a class="btn" href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub</a>
       <a class="btn" href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2 1 8l11 6 9-4.91V17h2V8L12 2zM5 13.18v4.16C5 19.7 8.13 21.5 12 21.5s7-1.8 7-4.16v-4.16l-7 3.82-7-3.82z"/></svg>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2 1 8l11 6 9-4.91V17h2V8L12 2zM5 13.18v4.16C5 19.7 8.13 21.5 12 21.5s7-1.8 7-4.16v-4.16l-7 3.82-7-3.82z"/></svg>
         Google Scholar
       </a>
+    </div>
+    <div class="footer-motion">
+      <button class="motion-toggle" data-motion-control data-motion-context="page" type="button" aria-pressed="true" aria-label="Pause page background animation">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+        <span>Pause page motion</span>
+      </button>
     </div>
     <p class="footer-note">&copy; <span id="year"></span> Muhammad Haseeb</p>
   </div>
 </footer>
 
+<script src="assets/portfolio.js" defer></script>
 <script>
+  // Keep the mobile summary visible; wide layouts lead with the animation.
+  const wideArchitecture = matchMedia('(min-width: 1200px)');
+  function syncArchitectureLayout() {
+    document.querySelectorAll('.arch-text').forEach(summary => {
+      summary.open = !wideArchitecture.matches;
+    });
+  }
+  syncArchitectureLayout();
+  wideArchitecture.addEventListener('change', syncArchitectureLayout);
+
+  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Architecture modal
+  const archModal   = document.getElementById('archModal');
+  const archFrame   = document.getElementById('archModalFrame');
+  const archTitle   = document.getElementById('archModalTitle');
+  const archClose   = document.getElementById('archModalClose');
+
+  window.openArchModal = function(src, title) {
+    archFrame.src = src;
+    archFrame.title = title;
+    document.getElementById('archOpenPage').href = src;
+    archTitle.textContent = title || 'System architecture';
+    archModal.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+  function closeArchModal() { if (archModal.open) archModal.close(); }
+  archModal.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    archFrame.removeAttribute('src');
+  });
+  archClose.addEventListener('click', closeArchModal);
+  archModal.addEventListener('click', e => { if (e.target === archModal) closeArchModal(); });
+  window.addEventListener('message', e => {
+    if (e.source === archFrame.contentWindow && e.data === 'close-architecture') closeArchModal();
+  });
+
+  // Theme toggle
+  const html   = document.documentElement;
+  const btn    = document.getElementById('themeToggle');
+  const icon   = document.getElementById('themeIcon');
+  const lbl    = document.getElementById('themeLabel');
+
+  const MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const SUN  = '<circle cx="12" cy="12" r="5"/>'
+             + '<line x1="12" y1="1" x2="12" y2="3"/>'
+             + '<line x1="12" y1="21" x2="12" y2="23"/>'
+             + '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>'
+             + '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>'
+             + '<line x1="1" y1="12" x2="3" y2="12"/>'
+             + '<line x1="21" y1="12" x2="23" y2="12"/>'
+             + '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>'
+             + '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+  function syncToggle(theme) {
+    btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+    btn.title = theme === 'light' ? 'Switch to Graphite' : 'Switch to Warm Parchment';
+    if (theme === 'light') {
+      icon.innerHTML = MOON;
+      lbl.textContent = 'Dark';
+    } else {
+      icon.innerHTML = SUN;
+      lbl.textContent = 'Light';
+    }
+  }
+
+  // Init
+  syncToggle(html.getAttribute('data-theme') || 'dark');
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('mh-theme', next); } catch(e) {}
+    syncToggle(next);
+  });
+
+  // Figure lightbox
+  const overlay   = document.getElementById('figOverlay');
+  const overlayImg = document.getElementById('figImg');
+  window.openFig = function(src, alt) {
+    overlayImg.src = src;
+    document.getElementById('figOriginal').href = src;
+    overlayImg.alt = alt || '';
+    document.getElementById('figCaption').textContent = alt || '';
+    overlay.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+  document.getElementById('figClose').addEventListener('click', closeFig);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFig(); });
+  overlay.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    overlayImg.removeAttribute('src');
+  });
+  function closeFig() {
+    if (overlay.open) overlay.close();
+  }
 </script>
 
 </body>

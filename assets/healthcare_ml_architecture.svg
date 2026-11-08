@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="atlas" viewBox="0 0 1440 1080" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">Clinical Risk Modeling Platform</title>
+<desc id="diagram-description">Clinical documents are transformed by Azure Databricks into Delta Lake features governed by Unity Catalog. MLflow records the model lifecycle; XGBoost candidates pass through subgroup evaluation and champion–challenger validation before batch inference and auditable reporting.</desc>
+<style>.atlas {--atlas-bg:#181b20;--atlas-title:#eeebe5;--atlas-body:#cbd1da;--atlas-note:#b7c2cf;--atlas-rule:#505e6e;--atlas-panel:#252e39;--atlas-outline:#71869e;--atlas-paper:#293847;--atlas-paper-stroke:#8ba5bd;--atlas-fold:#3c5064;--atlas-gate:#38312b;--atlas-cluster:#22383c;--atlas-cluster-well:#192c32;--atlas-pod:#2a4a48;--atlas-pod-stroke:#78bfb7;--atlas-pod-mark:#a1d7ce;--atlas-edge:#8ba5bd;--atlas-signal-edge:#bba080;--atlas-data:#93bcff;--atlas-signal:#e8c58a;--atlas-tint:#1b304d}
+@media(prefers-color-scheme:light) {:root:not([data-theme="dark"]) .atlas, :root.atlas:not([data-theme="dark"]) {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#2a557f;--atlas-signal:#78521c;--atlas-tint:#cbd8e4}}
+:root[data-theme="light"] .atlas, :root.atlas[data-theme="light"] {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#2a557f;--atlas-signal:#78521c;--atlas-tint:#cbd8e4}
+
+.atlas { background:var(--atlas-bg); font-family:Arial,Helvetica,sans-serif; }
+.atlas-canvas { fill:var(--atlas-bg); }
+.atlas text { font-family:Arial,Helvetica,sans-serif; }
+.atlas-title { font-size:20px; font-weight:600; fill:var(--atlas-title); }
+.atlas-body { font-size:18px; fill:var(--atlas-body); }
+.atlas-phase { font-size:17px; font-weight:600; fill:var(--atlas-data); }
+.atlas-label { font-size:17px; font-weight:600; fill:var(--atlas-title); }
+.atlas-note { font-size:16px; fill:var(--atlas-note); }
+.atlas-rule { fill:none; stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-panel { fill:var(--atlas-panel); stroke:var(--atlas-outline); stroke-width:1.2; }
+.atlas-paper { fill:var(--atlas-paper); stroke:var(--atlas-paper-stroke); stroke-width:1.2; }
+.atlas-sheet-back { fill:none; stroke:var(--atlas-outline); stroke-width:1; }
+.atlas-fold { fill:var(--atlas-fold); stroke:var(--atlas-paper-stroke); stroke-width:1; }
+.atlas-paper-line { fill:none; stroke:var(--atlas-paper-stroke); stroke-width:2; }
+.atlas-cylinder { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-top { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-ring { fill:none; stroke:var(--atlas-data); stroke-width:1; opacity:.55; }
+.atlas-gate { fill:var(--atlas-gate); stroke:var(--atlas-signal); stroke-width:1.4; }
+.atlas-icon { fill:none; stroke:var(--atlas-data); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.atlas-window-rule { stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-cluster { fill:var(--atlas-cluster); stroke:var(--atlas-data); stroke-width:1.5; }
+.atlas-pod { fill:var(--atlas-pod); stroke:var(--atlas-pod-stroke); stroke-width:1; }
+.atlas-pod-mark { fill:none; stroke:var(--atlas-pod-mark); stroke-width:1.5; }
+.atlas-edge { fill:none; stroke:var(--atlas-edge); stroke-width:2; stroke-linejoin:round; }
+.atlas-edge.signal { stroke:var(--atlas-signal-edge); }
+.atlas-trace { fill:none; stroke:var(--atlas-data); stroke-width:2.8; stroke-dasharray:7 93; stroke-linecap:round; animation:atlas-flow 7s linear infinite; }
+.atlas-trace.signal { stroke:var(--atlas-signal); }
+.paused .atlas-trace { animation-play-state:paused !important; }
+@keyframes atlas-flow { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+@media(prefers-reduced-motion:reduce) { .atlas-trace { animation:none !important; display:none; } }
+</style>
+<defs>
+<symbol id="icon-file" viewBox="0 0 32 32"><path d="M7 3h12l6 6v20H7zM19 3v7h6M12 16h8M12 21h8"/></symbol>
+<symbol id="icon-layers" viewBox="0 0 32 32"><path d="m3 10 13-7 13 7-13 7zM3 17l13 7 13-7M3 24l13 7 13-7"/></symbol>
+<symbol id="icon-branch" viewBox="0 0 32 32"><circle cx="8" cy="6" r="3"/><circle cx="24" cy="6" r="3"/><circle cx="8" cy="26" r="3"/><path d="M8 9v14M24 9v4a7 7 0 0 1-7 7H8"/></symbol>
+<symbol id="icon-cloud" viewBox="0 0 32 32"><path d="M8 25h16a6 6 0 0 0 0-12A9 9 0 0 0 7 11a7 7 0 0 0 1 14z"/></symbol>
+<symbol id="icon-bell" viewBox="0 0 32 32"><path d="M7 22h18l-3-4v-7a6 6 0 0 0-12 0v7zM13 27h6"/></symbol>
+<symbol id="icon-model" viewBox="0 0 32 32"><path d="m4 25 8-11 7 5L28 6M21 6h7v7"/></symbol>
+<symbol id="icon-search" viewBox="0 0 32 32"><circle cx="13" cy="13" r="9"/><path d="m20 20 9 9"/></symbol>
+<symbol id="icon-shield" viewBox="0 0 32 32"><path d="m16 3 11 5v9c0 7-5 10-11 13C10 27 5 24 5 17V8zM10 16l4 4 8-9"/></symbol>
+<marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-data)" stroke-width="1.5"/></marker>
+<marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-signal)" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1440" height="1080" class="atlas-canvas"/>
+<text class="atlas-phase" x="48" y="52">Clinical data &amp; governed features</text>
+<path class="atlas-rule" d="M48 68h1344"/>
+<text class="atlas-phase" x="48" y="316">Model lifecycle &amp; equity checks</text>
+<path class="atlas-rule" d="M48 332h1344"/>
+<text class="atlas-phase" x="48" y="576">Validation &amp; deployment</text>
+<path class="atlas-rule" d="M48 592h1344"/>
+<g aria-hidden="true"><path class="atlas-edge data" d="M338 185H440" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M338 185H440" style="animation-delay:0.0s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M800 185H948" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M800 185H948" style="animation-delay:0.7s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M1170 270V340" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M1170 270V340" style="animation-delay:1.4s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M948 420H800" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M948 420H800" style="animation-delay:2.0999999999999996s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M440 420H338" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M440 420H338" style="animation-delay:2.8s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M48 430H24V680H48" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M48 430H24V680H48" style="animation-delay:3.5s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M418 680H548" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M418 680H548" style="animation-delay:4.199999999999999s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M878 680H1008" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M878 680H1008" style="animation-delay:4.8999999999999995s"/></g>
+<g id="ehr">
+<path d="M60 90h274v170" class="atlas-sheet-back"/>
+<path d="M54 95h278v170" class="atlas-sheet-back"/>
+<path d="M48 100h258l32 32v138H48Z" class="atlas-paper"/>
+<path d="M306 100v32h32" class="atlas-fold"/>
+<path class="atlas-paper-line" d="M72 232h210M72 246h162"/>
+<text class="atlas-title" x="72" y="144">EHR data sources</text>
+<text class="atlas-body" x="72" y="182">Clinical records &amp; encounters</text>
+<text class="atlas-body" x="72" y="205">Labs, diagnoses and events</text>
+</g>
+<g id="databricks">
+<rect class="atlas-panel" x="440" y="100" width="360" height="170" rx="12"/>
+<use class="atlas-icon" href="#icon-layers" x="464" y="122" width="28" height="28"/>
+<path class="atlas-window-rule" d="M440 162h360"/>
+<text class="atlas-title" x="508" y="144">Azure Databricks</text>
+<text class="atlas-body" x="464" y="194">PySpark ETL pipelines</text>
+<text class="atlas-body" x="464" y="217">Normalize, validate and join</text>
+</g>
+<g id="delta">
+<path class="atlas-cylinder" d="M948 124v122c0 32 444 32 444 0V124Z"/>
+<ellipse cx="1170.0" cy="124" rx="222.0" ry="24" class="atlas-cylinder-top"/>
+<path class="atlas-cylinder-ring" d="M948 240c0 32 444 32 444 0"/>
+<text class="atlas-title" x="972" y="178">Delta Lake</text>
+<text class="atlas-body" x="972" y="212">Versioned feature-store tables</text>
+<text class="atlas-body" x="972" y="235">Unity Catalog governance</text>
+</g>
+<g id="mlflow">
+<rect class="atlas-panel" x="948" y="340" width="444" height="160" rx="12"/>
+<use class="atlas-icon" href="#icon-branch" x="972" y="362" width="28" height="28"/>
+<path class="atlas-window-rule" d="M948 402h444"/>
+<text class="atlas-title" x="1016" y="384">MLflow Model Registry</text>
+<text class="atlas-body" x="972" y="434">Experiment tracking and versioning</text>
+<text class="atlas-body" x="972" y="457">Model provenance and lineage</text>
+</g>
+<g id="risk">
+<path class="atlas-panel" d="M440 340h338l22 22v138H440Z"/>
+<use class="atlas-icon" href="#icon-model" x="464" y="362" width="28" height="28"/>
+<text class="atlas-title" x="508" y="384">XGBoost risk model</text>
+<text class="atlas-body" x="464" y="420">Clinical risk stratification</text>
+<text class="atlas-body" x="464" y="443">Scored, versioned candidates</text>
+</g>
+<g id="equity">
+<path class="atlas-gate" d="M72 340h242l24 24v132l-24 24H72l-24-24V364Z"/>
+<use class="atlas-icon" href="#icon-shield" x="72" y="360" width="28" height="28" style="stroke:var(--atlas-signal)"/>
+<text class="atlas-title" x="116" y="384">Subgroup evaluation</text>
+<text class="atlas-body" x="72" y="420">Age, gender and region</text>
+<text class="atlas-body" x="72" y="443">Condition-specific results</text>
+<text class="atlas-body" x="72" y="466">Fairness checks</text>
+</g>
+<g id="validation">
+<path class="atlas-gate" d="M72 600h322l24 24v112l-24 24H72l-24-24V624Z"/>
+<use class="atlas-icon" href="#icon-shield" x="72" y="620" width="28" height="28" style="stroke:var(--atlas-signal)"/>
+<text class="atlas-title" x="116" y="644">Champion–challenger</text>
+<text class="atlas-body" x="72" y="680">Compare model candidates</text>
+<text class="atlas-body" x="72" y="703">Quality and subgroup checks</text>
+</g>
+<g id="inference">
+<path class="atlas-panel" d="M548 600h308l22 22v138H548Z"/>
+<use class="atlas-icon" href="#icon-model" x="572" y="622" width="28" height="28"/>
+<text class="atlas-title" x="616" y="644">Batch inference</text>
+<text class="atlas-body" x="572" y="680">Versioned model deployment</text>
+<text class="atlas-body" x="572" y="703">Clinical risk scores</text>
+</g>
+<g id="audit">
+<path d="M1020 590h368v170" class="atlas-sheet-back"/>
+<path d="M1014 595h372v170" class="atlas-sheet-back"/>
+<path d="M1008 600h352l32 32v138H1008Z" class="atlas-paper"/>
+<path d="M1360 600v32h32" class="atlas-fold"/>
+<path class="atlas-paper-line" d="M1032 732h304M1032 746h256"/>
+<text class="atlas-title" x="1032" y="644">Audit report</text>
+<text class="atlas-body" x="1032" y="682">Risk results and evidence</text>
+<text class="atlas-body" x="1032" y="705">Reproducible reporting artifacts</text>
+</g>
+<path class="atlas-rule" d="M48 824h1344"/>
+<text class="atlas-label" x="48" y="858">Unity Catalog lineage</text>
+<text class="atlas-note" x="48" y="886">Governed feature provenance</text>
+<text class="atlas-label" x="548" y="858">MLflow provenance</text>
+<text class="atlas-note" x="548" y="886">Model versions and reproducibility</text>
+<text class="atlas-label" x="1008" y="858">Equity reporting</text>
+<text class="atlas-note" x="1008" y="886">Evidence across clinical cohorts</text>
+<path class="atlas-rule" d="M48 960h1344"/>
+<text class="atlas-label" x="48" y="994">8 weeks to 4 weeks</text>
+<text class="atlas-note" x="48" y="1022">Model deployment time</text>
+<text class="atlas-label" x="548" y="994">50% faster</text>
+<text class="atlas-note" x="548" y="1022">Pipeline deployment cycle</text>
+<text class="atlas-label" x="1008" y="994">Subgroup parity</text>
+<text class="atlas-note" x="1008" y="1022">Performance equity</text>
+</svg>

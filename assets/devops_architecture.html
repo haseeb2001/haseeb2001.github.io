@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GCP Cloud DevOps Platform | Architecture</title>
+<script>document.documentElement.classList.toggle('preview', new URLSearchParams(location.search).has('preview'));try{const t=localStorage.getItem('mh-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch{}</script>
+<link rel="stylesheet" href="architecture-viewer.css">
+</head>
+<body>
+<main class="wrap">
+<header class="head"><h1>GCP Cloud DevOps Platform</h1><p>Container delivery into a bounded cluster, with separate metrics and incident-response paths</p></header>
+<div class="viewport"><svg xmlns="http://www.w3.org/2000/svg" class="atlas" viewBox="0 0 1440 1220" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">GCP Cloud DevOps Platform</title>
+<desc id="diagram-description">GitHub Actions builds Docker images and Helm releases. Terraform provisions the GCP Kubernetes infrastructure. Managed Prometheus collects metrics; Monarch supports dashboards, while rule evaluation feeds Alertmanager, Slack runbooks and incident resolution.</desc>
+<style>.atlas {--atlas-bg:#181b20;--atlas-title:#eeebe5;--atlas-body:#cbd1da;--atlas-note:#b7c2cf;--atlas-rule:#505e6e;--atlas-panel:#252e39;--atlas-outline:#71869e;--atlas-paper:#293847;--atlas-paper-stroke:#8ba5bd;--atlas-fold:#3c5064;--atlas-gate:#38312b;--atlas-cluster:#22383c;--atlas-cluster-well:#192c32;--atlas-pod:#2a4a48;--atlas-pod-stroke:#78bfb7;--atlas-pod-mark:#a1d7ce;--atlas-edge:#8ba5bd;--atlas-signal-edge:#bba080;--atlas-data:#81d4df;--atlas-signal:#f0a1ae;--atlas-tint:#173741}
+@media(prefers-color-scheme:light) {:root:not([data-theme="dark"]) .atlas, :root.atlas:not([data-theme="dark"]) {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#17616e;--atlas-signal:#8b3d51;--atlas-tint:#c7dbdc}}
+:root[data-theme="light"] .atlas, :root.atlas[data-theme="light"] {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#17616e;--atlas-signal:#8b3d51;--atlas-tint:#c7dbdc}
+
+.atlas { background:var(--atlas-bg); font-family:Arial,Helvetica,sans-serif; }
+.atlas-canvas { fill:var(--atlas-bg); }
+.atlas text { font-family:Arial,Helvetica,sans-serif; }
+.atlas-title { font-size:20px; font-weight:600; fill:var(--atlas-title); }
+.atlas-body { font-size:18px; fill:var(--atlas-body); }
+.atlas-phase { font-size:17px; font-weight:600; fill:var(--atlas-data); }
+.atlas-label { font-size:17px; font-weight:600; fill:var(--atlas-title); }
+.atlas-note { font-size:16px; fill:var(--atlas-note); }
+.atlas-rule { fill:none; stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-panel { fill:var(--atlas-panel); stroke:var(--atlas-outline); stroke-width:1.2; }
+.atlas-paper { fill:var(--atlas-paper); stroke:var(--atlas-paper-stroke); stroke-width:1.2; }
+.atlas-sheet-back { fill:none; stroke:var(--atlas-outline); stroke-width:1; }
+.atlas-fold { fill:var(--atlas-fold); stroke:var(--atlas-paper-stroke); stroke-width:1; }
+.atlas-paper-line { fill:none; stroke:var(--atlas-paper-stroke); stroke-width:2; }
+.atlas-cylinder { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-top { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-ring { fill:none; stroke:var(--atlas-data); stroke-width:1; opacity:.55; }
+.atlas-gate { fill:var(--atlas-gate); stroke:var(--atlas-signal); stroke-width:1.4; }
+.atlas-icon { fill:none; stroke:var(--atlas-data); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.atlas-window-rule { stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-cluster { fill:var(--atlas-cluster); stroke:var(--atlas-data); stroke-width:1.5; }
+.atlas-pod { fill:var(--atlas-pod); stroke:var(--atlas-pod-stroke); stroke-width:1; }
+.atlas-pod-mark { fill:none; stroke:var(--atlas-pod-mark); stroke-width:1.5; }
+.atlas-edge { fill:none; stroke:var(--atlas-edge); stroke-width:2; stroke-linejoin:round; }
+.atlas-edge.signal { stroke:var(--atlas-signal-edge); }
+.atlas-trace { fill:none; stroke:var(--atlas-data); stroke-width:2.8; stroke-dasharray:7 93; stroke-linecap:round; animation:atlas-flow 7s linear infinite; }
+.atlas-trace.signal { stroke:var(--atlas-signal); }
+.paused .atlas-trace { animation-play-state:paused !important; }
+@keyframes atlas-flow { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+@media(prefers-reduced-motion:reduce) { .atlas-trace { animation:none !important; display:none; } }
+</style>
+<defs>
+<symbol id="icon-file" viewBox="0 0 32 32"><path d="M7 3h12l6 6v20H7zM19 3v7h6M12 16h8M12 21h8"/></symbol>
+<symbol id="icon-layers" viewBox="0 0 32 32"><path d="m3 10 13-7 13 7-13 7zM3 17l13 7 13-7M3 24l13 7 13-7"/></symbol>
+<symbol id="icon-branch" viewBox="0 0 32 32"><circle cx="8" cy="6" r="3"/><circle cx="24" cy="6" r="3"/><circle cx="8" cy="26" r="3"/><path d="M8 9v14M24 9v4a7 7 0 0 1-7 7H8"/></symbol>
+<symbol id="icon-cloud" viewBox="0 0 32 32"><path d="M8 25h16a6 6 0 0 0 0-12A9 9 0 0 0 7 11a7 7 0 0 0 1 14z"/></symbol>
+<symbol id="icon-bell" viewBox="0 0 32 32"><path d="M7 22h18l-3-4v-7a6 6 0 0 0-12 0v7zM13 27h6"/></symbol>
+<symbol id="icon-model" viewBox="0 0 32 32"><path d="m4 25 8-11 7 5L28 6M21 6h7v7"/></symbol>
+<symbol id="icon-search" viewBox="0 0 32 32"><circle cx="13" cy="13" r="9"/><path d="m20 20 9 9"/></symbol>
+<symbol id="icon-shield" viewBox="0 0 32 32"><path d="m16 3 11 5v9c0 7-5 10-11 13C10 27 5 24 5 17V8zM10 16l4 4 8-9"/></symbol>
+<marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-data)" stroke-width="1.5"/></marker>
+<marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-signal)" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1440" height="1220" class="atlas-canvas"/>
+<text class="atlas-phase" x="48" y="52">Build &amp; deploy</text>
+<path class="atlas-rule" d="M48 68h300"/>
+<text class="atlas-phase" x="440" y="52">Kubernetes runtime</text>
+<path class="atlas-rule" d="M440 68h500"/>
+<text class="atlas-phase" x="1040" y="52">Observe &amp; respond</text>
+<path class="atlas-rule" d="M1040 68h352"/>
+<g aria-hidden="true"><path class="atlas-edge data" d="M198 220V310" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M198 220V310" style="animation-delay:0.0s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M198 450V520" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M198 450V520" style="animation-delay:0.7s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M348 590H392V260H440" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M348 590H392V260H440" style="animation-delay:1.4s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M48 160H24V820H48" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M48 160H24V820H48" style="animation-delay:0.0s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M348 820H416V320H440" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M348 820H416V320H440" style="animation-delay:0.7s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M690 400V470" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M690 400V470" style="animation-delay:2.0999999999999996s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M940 550H992V185H1040" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M940 550H992V185H1040" style="animation-delay:2.8s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M1216 270V340" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M1216 270V340" style="animation-delay:3.5s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M690 646V720" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M690 646V720" style="animation-delay:2.8s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M880 790H992V630H1040" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M880 790H992V630H1040" style="animation-delay:3.5s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M1216 690V750" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M1216 690V750" style="animation-delay:4.199999999999999s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M1216 896V932H660V970" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M1216 896V932H660V970" style="animation-delay:4.8999999999999995s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M1216 932V970" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M1216 932V970" style="animation-delay:4.8999999999999995s"/></g>
+<g id="github">
+<rect class="atlas-panel" x="48" y="100" width="300" height="120" rx="12"/>
+<use class="atlas-icon" href="#icon-branch" x="72" y="122" width="28" height="28"/>
+<text class="atlas-title" x="116" y="144">GitHub Actions</text>
+<text class="atlas-body" x="72" y="180">Continuous integration</text>
+<text class="atlas-body" x="72" y="203">Continuous delivery</text>
+</g>
+<g id="docker">
+<path d="M60 300h284v140" class="atlas-sheet-back"/>
+<path d="M54 305h288v140" class="atlas-sheet-back"/>
+<path d="M48 310h268l32 32v108H48Z" class="atlas-paper"/>
+<path d="M316 310v32h32" class="atlas-fold"/>
+<text class="atlas-title" x="72" y="354">Docker images</text>
+<text class="atlas-body" x="72" y="392">Build, tag and publish</text>
+</g>
+<g id="helm">
+<rect class="atlas-panel" x="48" y="520" width="300" height="140" rx="12"/>
+<use class="atlas-icon" href="#icon-layers" x="72" y="542" width="28" height="28"/>
+<path class="atlas-window-rule" d="M48 582h300"/>
+<text class="atlas-title" x="116" y="564">Helm releases</text>
+<text class="atlas-body" x="72" y="614">Deploy application workloads</text>
+</g>
+<g id="terraform">
+<path class="atlas-panel" d="M48 750h278l22 22v118H48Z"/>
+<use class="atlas-icon" href="#icon-cloud" x="72" y="772" width="28" height="28"/>
+<text class="atlas-title" x="116" y="794">Terraform</text>
+<text class="atlas-body" x="72" y="830">Infrastructure as code</text>
+<text class="atlas-body" x="72" y="853">Provision GCP resources</text>
+</g>
+<g id="kubernetes">
+<rect class="atlas-cluster" x="440" y="100" width="500" height="300" rx="20"/>
+<use class="atlas-icon" href="#icon-cloud" x="464" y="124" width="28" height="28"/>
+<text class="atlas-title" x="508" y="146">GCP Kubernetes</text>
+<text class="atlas-body" x="464" y="182">40+ containerized microservices</text>
+<rect x="464" y="210" width="452" height="140" rx="12" fill="var(--atlas-cluster-well)" stroke="var(--atlas-pod-stroke)"/>
+<rect class="atlas-pod" x="484.0" y="230" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M498.0 242h98.66666666666667M498.0 253h78.66666666666667"/>
+<rect class="atlas-pod" x="626.6666666666667" y="230" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M640.6666666666667 242h98.66666666666667M640.6666666666667 253h78.66666666666667"/>
+<rect class="atlas-pod" x="769.3333333333334" y="230" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M783.3333333333334 242h98.66666666666667M783.3333333333334 253h78.66666666666667"/>
+<rect class="atlas-pod" x="484.0" y="284" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M498.0 296h98.66666666666667M498.0 307h78.66666666666667"/>
+<rect class="atlas-pod" x="626.6666666666667" y="284" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M640.6666666666667 296h98.66666666666667M640.6666666666667 307h78.66666666666667"/>
+<rect class="atlas-pod" x="769.3333333333334" y="284" width="126.66666666666667" height="36" rx="7"/>
+<path class="atlas-pod-mark" d="M783.3333333333334 296h98.66666666666667M783.3333333333334 307h78.66666666666667"/>
+<text class="atlas-note" x="464" y="376">Pods · Services · Workloads</text>
+</g>
+<g id="prometheus">
+<rect class="atlas-panel" x="440" y="470" width="500" height="176" rx="12"/>
+<use class="atlas-icon" href="#icon-model" x="464" y="492" width="28" height="28"/>
+<path class="atlas-window-rule" d="M440 532h500"/>
+<text class="atlas-title" x="508" y="514">Managed Prometheus</text>
+<text class="atlas-body" x="464" y="564">Collectors: Kubernetes metrics</text>
+<text class="atlas-body" x="464" y="587">Exporters: custom metrics</text>
+</g>
+<g id="rules">
+<path class="atlas-panel" d="M440 720h418l22 22v118H440Z"/>
+<use class="atlas-icon" href="#icon-model" x="464" y="742" width="28" height="28"/>
+<text class="atlas-title" x="508" y="764">Rule evaluator</text>
+<text class="atlas-body" x="464" y="800">Thresholds and alert conditions</text>
+</g>
+<g id="monarch">
+<path class="atlas-cylinder" d="M1040 124v122c0 32 352 32 352 0V124Z"/>
+<ellipse cx="1216.0" cy="124" rx="176.0" ry="24" class="atlas-cylinder-top"/>
+<path class="atlas-cylinder-ring" d="M1040 240c0 32 352 32 352 0"/>
+<text class="atlas-title" x="1064" y="178">GCP Monarch DB</text>
+<text class="atlas-body" x="1064" y="212">Managed time-series storage</text>
+</g>
+<g id="dashboards">
+<rect class="atlas-panel" x="1040" y="340" width="352" height="160" rx="12"/>
+<use class="atlas-icon" href="#icon-model" x="1064" y="362" width="28" height="28"/>
+<path class="atlas-window-rule" d="M1040 402h352"/>
+<text class="atlas-title" x="1108" y="384">Metrics dashboards</text>
+<text class="atlas-body" x="1064" y="434">Grafana and Prometheus UI</text>
+<text class="atlas-body" x="1064" y="457">Cloud Monitoring alternative</text>
+</g>
+<g id="alerts">
+<rect class="atlas-panel" x="1040" y="570" width="352" height="120" rx="12"/>
+<use class="atlas-icon" href="#icon-bell" x="1064" y="592" width="28" height="28"/>
+<text class="atlas-title" x="1108" y="614">Alertmanager</text>
+<text class="atlas-body" x="1064" y="650">Route firing alerts</text>
+</g>
+<g id="slack">
+<rect class="atlas-panel" x="1040" y="750" width="352" height="146" rx="12"/>
+<use class="atlas-icon" href="#icon-file" x="1064" y="772" width="28" height="28"/>
+<text class="atlas-title" x="1108" y="794">Slack &amp; runbooks</text>
+<text class="atlas-body" x="1064" y="830">Known errors and debugging steps</text>
+<text class="atlas-body" x="1064" y="853">Incident triage and ownership</text>
+</g>
+<g id="internal">
+<rect class="atlas-panel" x="440" y="970" width="440" height="112" rx="12"/>
+<use class="atlas-icon" href="#icon-branch" x="464" y="992" width="28" height="28"/>
+<text class="atlas-title" x="508" y="1014">Internal resolution</text>
+<text class="atlas-body" x="464" y="1050">Technical team investigation</text>
+</g>
+<g id="provider">
+<rect class="atlas-panel" x="1040" y="970" width="352" height="112" rx="12"/>
+<use class="atlas-icon" href="#icon-branch" x="1064" y="992" width="28" height="28"/>
+<text class="atlas-title" x="1108" y="1014">Provider escalation</text>
+<text class="atlas-body" x="1064" y="1050">Contact the microservice owner</text>
+</g>
+<path class="atlas-rule" d="M48 1110h1344"/>
+<text class="atlas-label" x="48" y="1144">99.7% uptime</text>
+<text class="atlas-note" x="48" y="1172">Service reliability</text>
+<text class="atlas-label" x="548" y="1144">60% faster incident response</text>
+<text class="atlas-note" x="548" y="1172">Operational efficiency</text>
+<text class="atlas-label" x="1040" y="1144">40+ microservices</text>
+<text class="atlas-note" x="1040" y="1172">Kubernetes workloads</text>
+</svg></div>
+</main>
+<script src="architecture-viewer.js"></script>
+</body>
+</html>
