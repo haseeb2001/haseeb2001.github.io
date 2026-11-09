@@ -1,4 +1,35 @@
 (() => {
+  const navigation = document.querySelector('.site-nav');
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  if (navigation && navToggle && mainNav) {
+    const phoneNavigation = matchMedia('(max-width: 680px)');
+    function setNavigationOpen(open, restoreFocus = false) {
+      navigation.classList.toggle('nav-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      if (restoreFocus) navToggle.focus();
+    }
+    navigation.classList.add('nav-enhanced');
+    navToggle.hidden = false;
+    navToggle.addEventListener('click', () => setNavigationOpen(navToggle.getAttribute('aria-expanded') !== 'true'));
+    navigation.addEventListener('click', event => {
+      if (phoneNavigation.matches && event.target.closest('a')) setNavigationOpen(false, true);
+    });
+    document.addEventListener('pointerdown', event => {
+      if (phoneNavigation.matches && navigation.classList.contains('nav-open') && !navigation.contains(event.target)) setNavigationOpen(false);
+    });
+    navigation.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && navigation.classList.contains('nav-open')) {
+        setNavigationOpen(false, true);
+        event.preventDefault();
+      }
+    });
+    phoneNavigation.addEventListener('change', () => {
+      const focusWasInMenu = mainNav.contains(document.activeElement);
+      setNavigationOpen(false, phoneNavigation.matches && focusWasInMenu);
+    });
+  }
   const architectureFrames = [...document.querySelectorAll('.arch-preview iframe, #archModalFrame')];
   // Include inline architecture frames independently of presentation class names.
   document.querySelectorAll('iframe[src*="_architecture.html"]').forEach(frame => {
@@ -15,6 +46,30 @@
   });
   new MutationObserver(() => architectureFrames.forEach(sendArchitectureTheme)).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   architectureFrames.forEach(sendArchitectureTheme);
+
+  // Keep project depth optional; preserve the native disclosure states across resizes.
+  function revealProjectTarget(hash) {
+    let target;
+    try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return; }
+    if (!target) return;
+    const parents = [];
+    for (let node = target; node; node = node.parentElement) {
+      if (node.matches('details') && !node.open) parents.unshift(node);
+    }
+    parents.forEach(details => { details.open = true; if (details.matches('.project-details')) details.dataset.chosen = 'true'; });
+    if (parents.length) requestAnimationFrame(() => target.scrollIntoView({block: 'start'}));
+  }
+  document.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    revealProjectTarget(link.getAttribute('href'));
+  });
+  addEventListener('hashchange', () => revealProjectTarget(location.hash));
+  revealProjectTarget(location.hash);
+  document.querySelectorAll('.project-details, .more-work').forEach(details => {
+    details.addEventListener('toggle', () => requestAnimationFrame(syncLocation));
+  });
 
   const composer = document.getElementById('contactComposer');
   if (composer) {
@@ -95,6 +150,8 @@
   const motionControls = [...document.querySelectorAll('[data-motion-control]')];
   const journeySections = [...document.querySelectorAll('[data-journey]')];
   const journeyVisibility = new Map(journeySections.map(section => [section, false]));
+  const projectOverviews = [...document.querySelectorAll('.project-overview')];
+  const overviewVisibility = new Map(projectOverviews.map(overview => [overview, false]));
   let userPaused = false;
   let heroVisible = false;
   try { userPaused = localStorage.getItem('mh-motion') === 'paused'; } catch {}
@@ -105,6 +162,9 @@
     journeySections.forEach(section => {
       const stopped = userPaused || reducedMotion.matches || !journeyVisibility.get(section) || document.hidden;
       section.dataset.motion = stopped ? 'paused' : 'running';
+    });
+    projectOverviews.forEach(overview => {
+      overview.dataset.motion = userPaused || reducedMotion.matches || !overviewVisibility.get(overview) || document.hidden ? 'paused' : 'running';
     });
     motionControls.forEach(control => {
       const pageControl = control.dataset.motionContext === 'page';
@@ -179,6 +239,13 @@
     hero?.classList.toggle('is-animated', !event.matches);
     syncBackgroundMotion();
   });
+  if (projectOverviews.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => overviewVisibility.set(entry.target, entry.isIntersecting));
+      syncBackgroundMotion();
+    });
+    projectOverviews.forEach(overview => observer.observe(overview));
+  }
   syncBackgroundMotion();
 
   // The long portfolio needs a stable location cue, not repeated entrance effects.

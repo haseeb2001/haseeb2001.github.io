@@ -21,7 +21,10 @@
 <header class="site-nav">
   <div class="w nav-inner">
     <a href="#" class="nav-logo">Muhammad <strong>Haseeb</strong></a>
-    <nav class="nav-links" aria-label="Main navigation">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav" hidden>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path class="nav-menu-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="nav-close-icon" d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <nav class="nav-links" id="mainNav" aria-label="Main navigation">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
       <a href="#research">Research</a>
@@ -64,8 +67,11 @@
     <div class="hero-text">
       <h1 id="intro-title"><span class="hero-title-line">From models</span><span class="hero-title-line">to <em>production.</em></span></h1>
       <p class="hero-role">Muhammad Haseeb <span aria-hidden="true">/</span> Machine Learning Engineer</p>
-      <p class="hero-sub">3+ years building production ML, NLP and agentic AI systems — from feature stores and Kubernetes services to fine-tuned LLMs and RAG pipelines.</p>
-      <p class="hero-bio">My background spans production ML at DEVSINC and applied AI research for TxDOT at Texas Tech University. <a href="#about">More about me</a></p>
+      <p class="hero-sub">3+ years building production ML and LLM systems for healthcare, document review and cloud infrastructure.</p>
+      <dl class="hero-career" aria-label="Experience at a glance">
+        <div><dt>Texas Tech · TxDOT research</dt><dd>Graduate Research Assistant <span>2025–present</span></dd></div>
+        <div><dt>DEVSINC</dt><dd>Senior Software Engineer <span>2022–2025</span></dd></div>
+      </dl>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See the work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
         <a class="btn btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">View résumé <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
@@ -97,33 +103,29 @@
 
       <div class="hero-papers" aria-label="Selected research publications">
         <a class="hero-paper" href="#paper-www">
-          <span class="hero-paper-venue">WWW ’26 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-paper-venue">WWW Companion ’26 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
           <strong>Unified vs. multi-agent feedback</strong>
-          <span>First author · Programming assessment</span>
+          <span>First author<span class="hero-paper-detail"> · Programming assessment</span></span>
         </a>
         <a class="hero-paper" href="#paper-bea">
           <span class="hero-paper-venue">BEA 2026 @ ACL <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
           <strong>Cross-domain LLM evaluation</strong>
-          <span>First author · Programming, math &amp; writing</span>
+          <span>First author<span class="hero-paper-detail"> · Programming, math &amp; writing</span></span>
         </a>
       </div>
     </aside>
     <div class="hero-credentials">
-      <p class="hero-research">First-author research at <a href="#research">WWW ’26 and BEA 2026 @ ACL</a>.</p>
-      <div class="hero-socials" aria-label="Professional profiles">
+      <div class="hero-socials" aria-label="Profiles and background">
         <a href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://scholar.google.com/citations?view_op=list_works&amp;hl=en&amp;user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#about">About me</a>
         <button class="motion-toggle" id="motionToggle" data-motion-control type="button" aria-pressed="true" aria-label="Pause background animation">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
           <span>Pause background</span>
         </button>
       </div>
     </div>
-  </div>
-  <div class="w hero-focus" aria-label="Core engineering focus">
-    <span>LLMs &amp; agentic systems</span><span>Production ML platforms</span><span>Cloud infrastructure &amp; MLOps</span>
-    <a href="#skills">Explore the toolkit <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
   </div>
 </section>
 
@@ -144,7 +146,7 @@
           <span class="cs-domain">Healthcare · LLM engineering</span>
           <span class="cs-year">DEVSINC · Deployed model + Model Garden R&amp;D</span>
         </div>
-        <p class="cs-desc">Schema-grounded GPT-4 prompting turns claims questions into BigQuery SQL. Separate dry-run and semantic checks feed a validated training dataset for fine-tuning, with a deployed davinci-002 model and LLaMA / Code LLaMA LoRA experiments on GCP Model Garden.</p>
+        <p class="cs-desc">Turns plain-English healthcare claims questions into BigQuery SQL, with separate syntax/schema checks and semantic review. Includes a deployed davinci-002 model and LLaMA / Code LLaMA LoRA research on GCP Model Garden.</p>
         <div class="cs-metrics">
           <div class="cs-metric"><span class="cs-mnum">97<small>%+</small></span><span class="cs-mlbl">Dry-run validity</span><span class="cs-mchg">syntax &amp; schema, not answer accuracy</span></div>
           <div class="cs-metric"><span class="cs-mnum">200</span><span class="cs-mlbl">Validated pairs</span><span class="cs-mchg">question–SQL training data</span></div>
@@ -238,18 +240,13 @@
         <div class="cs-summary-visual">
           <div class="cs-summary-copy">
         <p class="cs-desc">
-          Unified feature store and ML pipeline infrastructure serving risk-scoring models across a large healthcare insurance carrier — with subgroup equity analysis, Unity Catalog data lineage, and champion–challenger validation built in for regulatory auditability.
+          Helps teams reuse governed features and deploy risk-scoring models at a large healthcare insurance carrier. Subgroup equity analysis, data lineage and champion–challenger validation support regulatory auditability.
         </p>
-        <div class="cs-metrics">
+        <div class="cs-metrics cs-metrics-health">
           <div class="cs-metric">
             <span class="cs-mnum">4<small> wks</small></span>
             <span class="cs-mlbl">Deployment Time</span>
             <span class="cs-mchg">↓ from 8 weeks</span>
-          </div>
-          <div class="cs-metric">
-            <span class="cs-mnum cs-mnum-g">50<small>%</small></span>
-            <span class="cs-mlbl">Faster Cycle Time</span>
-            <span class="cs-mchg">pipeline deployment</span>
           </div>
           <div class="cs-metric">
             <span class="cs-mnum">3</span>
@@ -727,16 +724,36 @@
       <h2 class="sec-title">About</h2>
     </div>
     <div class="about-body">
-    <p class="about-text">
-      I build conversational AI with intent recognition and multi-agent orchestration, RAG pipelines,
-      LoRA fine-tuned models, and MLOps infrastructure serving 40+ microservices at 99.7% uptime.
-      At DEVSINC I led ML engineering across healthcare insurance, construction-tech, and cloud DevOps
-      engagements — including an Azure Databricks feature store adoption that cut model deployment
-      time in half, and a GCP Kubernetes platform that became the backbone for a large client's
-      production ML workloads. At Texas Tech University, my TxDOT work combines statistical and LLM-based
-      analysis of crash causes and patterns to support stakeholder safety decisions. I also research AI-driven feedback and evaluation systems for personalised learning using LLMs across
-      programming, math, and writing domains — with two papers accepted at top-tier venues.
-    </p>
+    <p class="about-text">My work spans production ML at DEVSINC and applied AI research at Texas Tech University.
+      At DEVSINC, I led ML engineering across healthcare insurance, construction technology and cloud infrastructure,
+      supervising a team of three engineers. My TTU work uses statistical and LLM-based analysis to investigate
+      crash causes and patterns for TxDOT stakeholders.</p>
+    <p class="about-text">I also research LLM-based student feedback and evaluation across programming, mathematics
+      and writing, with first-author papers at WWW Companion ’26 and BEA 2026 at ACL.
+      <a href="#research">Explore the research</a>.</p>
+    <div class="about-personal">
+      <div class="about-personal-copy">
+        <h3>Away from the keyboard</h3>
+        <p>Usually watching a film, following an anime series, or up for a game of table tennis.
+          Lately, I’m learning to skateboard.</p>
+      </div>
+      <svg class="about-skateboard" viewBox="0 0 240 120" aria-hidden="true" focusable="false">
+        <g class="skate-board">
+          <path class="skate-deck" d="M18 36 40 49 Q45 52 54 52 H186 Q195 52 200 49 L222 36 L225 42 204 57 Q197 62 186 62 H54 Q43 62 36 57 L15 42Z"/>
+          <g class="skate-trucks">
+            <path d="M65 62V74M175 62V74M55 74H75M165 74H185"/>
+            <circle cx="65" cy="83" r="13"/><circle cx="175" cy="83" r="13"/>
+          </g>
+          <g class="skate-wheel skate-wheel-front">
+            <path d="M59 83H71M65 77V89"/>
+          </g>
+          <g class="skate-wheel skate-wheel-rear">
+            <path d="M169 83H181M175 77V89"/>
+          </g>
+          <path class="skate-deck-mark" d="M104 57H136"/>
+        </g>
+      </svg>
+    </div>
     <figure class="about-quote">
       <blockquote><p>“Get busy living, or get busy dying.”</p></blockquote>
       <figcaption>— <cite>The Shawshank Redemption</cite></figcaption>
