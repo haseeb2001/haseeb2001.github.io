@@ -1,4 +1,4 @@
-/* Shared presentation for the three self-contained SVG architectures. */
+/* Shared presentation for the self-contained SVG architectures. */
 :root { color-scheme: dark; --viewer-bg: #181b20; --viewer-panel: #252e39; --viewer-text: #eeebe5; --viewer-muted: #c0c5cf; --viewer-accent: #b4ccf4; --viewer-border: #71869e; --viewer-hover: #344354; --viewer-active: #40536a; }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) { color-scheme: light; --viewer-bg: #e7e1d5; --viewer-panel: #dad3c6; --viewer-text: #252b33; --viewer-muted: #46505a; --viewer-accent: #2a506f; --viewer-border: #687a86; --viewer-hover: #cfc7b9; --viewer-active: #c2b8a7; }

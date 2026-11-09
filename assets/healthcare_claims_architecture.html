@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare Claims Text-to-SQL Pipeline | Architecture</title>
+<script>document.documentElement.classList.toggle('preview', new URLSearchParams(location.search).has('preview'));try{const t=localStorage.getItem('mh-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch{}</script>
+<link rel="stylesheet" href="architecture-viewer.css">
+</head>
+<body>
+<main class="wrap">
+<header class="head"><h1>Healthcare Claims Text-to-SQL Pipeline</h1><p>Schema-grounded SQL generation, separate validity and intent checks, and model fine-tuning</p></header>
+<div class="viewport"><svg xmlns="http://www.w3.org/2000/svg" class="atlas" viewBox="0 0 1440 1270" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">Healthcare Claims Text-to-SQL Pipeline</title>
+<desc id="diagram-description">Natural-language claims questions use BigQuery schema extraction and GPT-4 few-shot prompting to generate SQL. BigQuery dry runs check syntax and schema without execution; GPT-4 separately reviews question alignment and suggests corrections. Validated question–SQL pairs are exported for model fine-tuning. The source reports 97%+ dry-run validity and 200 validated pairs, a deployed davinci-002 model, and GCP Model Garden LLaMA / Code LLaMA LoRA experiments.</desc>
+<style>.atlas {--atlas-bg:#181b20;--atlas-title:#eeebe5;--atlas-body:#cbd1da;--atlas-note:#b7c2cf;--atlas-rule:#505e6e;--atlas-panel:#252e39;--atlas-outline:#71869e;--atlas-paper:#293847;--atlas-paper-stroke:#8ba5bd;--atlas-fold:#3c5064;--atlas-gate:#38312b;--atlas-cluster:#22383c;--atlas-cluster-well:#192c32;--atlas-pod:#2a4a48;--atlas-pod-stroke:#78bfb7;--atlas-pod-mark:#a1d7ce;--atlas-edge:#8ba5bd;--atlas-signal-edge:#bba080;--atlas-data:#c3b4f4;--atlas-signal:#8cddc7;--atlas-tint:#332c4c}
+@media(prefers-color-scheme:light) {:root:not([data-theme="dark"]) .atlas, :root.atlas:not([data-theme="dark"]) {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#62468a;--atlas-signal:#236453;--atlas-tint:#dbd1e6}}
+:root[data-theme="light"] .atlas, :root.atlas[data-theme="light"] {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#62468a;--atlas-signal:#236453;--atlas-tint:#dbd1e6}
+
+.atlas { background:var(--atlas-bg); font-family:Arial,Helvetica,sans-serif; }
+.atlas-canvas { fill:var(--atlas-bg); }
+.atlas text { font-family:Arial,Helvetica,sans-serif; }
+.atlas-title { font-size:20px; font-weight:600; fill:var(--atlas-title); }
+.atlas-body { font-size:18px; fill:var(--atlas-body); }
+.atlas-phase { font-size:17px; font-weight:600; fill:var(--atlas-data); }
+.atlas-label { font-size:17px; font-weight:600; fill:var(--atlas-title); }
+.atlas-note { font-size:16px; fill:var(--atlas-note); }
+.atlas-rule { fill:none; stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-panel { fill:var(--atlas-panel); stroke:var(--atlas-outline); stroke-width:1.2; }
+.atlas-paper { fill:var(--atlas-paper); stroke:var(--atlas-paper-stroke); stroke-width:1.2; }
+.atlas-sheet-back { fill:none; stroke:var(--atlas-outline); stroke-width:1; }
+.atlas-fold { fill:var(--atlas-fold); stroke:var(--atlas-paper-stroke); stroke-width:1; }
+.atlas-paper-line { fill:none; stroke:var(--atlas-paper-stroke); stroke-width:2; }
+.atlas-cylinder { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-top { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-ring { fill:none; stroke:var(--atlas-data); stroke-width:1; opacity:.55; }
+.atlas-gate { fill:var(--atlas-gate); stroke:var(--atlas-signal); stroke-width:1.4; }
+.atlas-icon { fill:none; stroke:var(--atlas-data); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.atlas-window-rule { stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-cluster { fill:var(--atlas-cluster); stroke:var(--atlas-data); stroke-width:1.5; }
+.atlas-pod { fill:var(--atlas-pod); stroke:var(--atlas-pod-stroke); stroke-width:1; }
+.atlas-pod-mark { fill:none; stroke:var(--atlas-pod-mark); stroke-width:1.5; }
+.atlas-edge { fill:none; stroke:var(--atlas-edge); stroke-width:2; stroke-linejoin:round; }
+.atlas-edge.signal { stroke:var(--atlas-signal-edge); }
+.atlas-trace { fill:none; stroke:var(--atlas-data); stroke-width:2.8; stroke-dasharray:7 93; stroke-linecap:round; animation:atlas-flow 7s linear infinite; }
+.atlas-trace.signal { stroke:var(--atlas-signal); }
+.paused .atlas-trace { animation-play-state:paused !important; }
+@keyframes atlas-flow { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+@media(prefers-reduced-motion:reduce) { .atlas-trace { animation:none !important; display:none; } }
+</style>
+<defs>
+<symbol id="icon-file" viewBox="0 0 32 32"><path d="M7 3h12l6 6v20H7zM19 3v7h6M12 16h8M12 21h8"/></symbol>
+<symbol id="icon-layers" viewBox="0 0 32 32"><path d="m3 10 13-7 13 7-13 7zM3 17l13 7 13-7M3 24l13 7 13-7"/></symbol>
+<symbol id="icon-branch" viewBox="0 0 32 32"><circle cx="8" cy="6" r="3"/><circle cx="24" cy="6" r="3"/><circle cx="8" cy="26" r="3"/><path d="M8 9v14M24 9v4a7 7 0 0 1-7 7H8"/></symbol>
+<symbol id="icon-cloud" viewBox="0 0 32 32"><path d="M8 25h16a6 6 0 0 0 0-12A9 9 0 0 0 7 11a7 7 0 0 0 1 14z"/></symbol>
+<symbol id="icon-bell" viewBox="0 0 32 32"><path d="M7 22h18l-3-4v-7a6 6 0 0 0-12 0v7zM13 27h6"/></symbol>
+<symbol id="icon-model" viewBox="0 0 32 32"><path d="m4 25 8-11 7 5L28 6M21 6h7v7"/></symbol>
+<symbol id="icon-search" viewBox="0 0 32 32"><circle cx="13" cy="13" r="9"/><path d="m20 20 9 9"/></symbol>
+<symbol id="icon-shield" viewBox="0 0 32 32"><path d="m16 3 11 5v9c0 7-5 10-11 13C10 27 5 24 5 17V8zM10 16l4 4 8-9"/></symbol>
+<marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-data)" stroke-width="1.5"/></marker>
+<marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-signal)" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1440" height="1270" class="atlas-canvas"/>
+<text class="atlas-phase" x="48" y="52">Question &amp; schema context</text>
+<path class="atlas-rule" d="M48 68h1344"/>
+<text class="atlas-phase" x="48" y="352">Generate &amp; validate</text>
+<path class="atlas-rule" d="M48 368h1344"/>
+<text class="atlas-phase" x="48" y="702">Export &amp; model iteration</text>
+<path class="atlas-rule" d="M48 718h1344"/>
+<g aria-hidden="true"><path class="atlas-edge data" d="M418 185H540" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M418 185H540" style="animation-delay:0.0s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M910 185H1032" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M910 185H1032" style="animation-delay:0.7s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M1212 270V308H24V490H48" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M1212 270V308H24V490H48" style="animation-delay:1.4s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M418 490H540" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M418 490H540" style="animation-delay:2.0999999999999996s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M910 490H1032" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M910 490H1032" style="animation-delay:2.8s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M1212 580V644H318V750" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M1212 580V644H318V750" style="animation-delay:3.5s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M588 845H760" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M588 845H760" style="animation-delay:4.199999999999999s"/></g>
+<g id="question">
+<path d="M60 90h354v190" class="atlas-sheet-back"/>
+<path d="M54 95h358v190" class="atlas-sheet-back"/>
+<path d="M48 100h338l32 32v158H48Z" class="atlas-paper"/>
+<path d="M386 100v32h32" class="atlas-fold"/>
+<path class="atlas-paper-line" d="M72 252h290M72 266h242"/>
+<text class="atlas-title" x="72" y="144">Natural-language query</text>
+<text class="atlas-body" x="72" y="182">Plain-English claims question</text>
+<text class="atlas-body" x="72" y="205">Example: highest denied claims</text>
+<text class="atlas-body" x="72" y="228">by payer</text>
+</g>
+<g id="schema">
+<path class="atlas-cylinder" d="M540 124v122c0 32 370 32 370 0V124Z"/>
+<ellipse cx="725.0" cy="124" rx="185.0" ry="24" class="atlas-cylinder-top"/>
+<path class="atlas-cylinder-ring" d="M540 240c0 32 370 32 370 0"/>
+<text class="atlas-title" x="564" y="178">BigQuery schema</text>
+<text class="atlas-body" x="564" y="212">INFORMATION_SCHEMA metadata</text>
+<text class="atlas-body" x="564" y="235">Field descriptions and columns</text>
+<text class="atlas-body" x="564" y="258">CREATE TABLE DDL</text>
+</g>
+<g id="prompt">
+<rect class="atlas-panel" x="1032" y="100" width="360" height="170" rx="12"/>
+<use class="atlas-icon" href="#icon-layers" x="1056" y="122" width="28" height="28"/>
+<path class="atlas-window-rule" d="M1032 162h360"/>
+<text class="atlas-title" x="1100" y="144">GPT-4 prompt engine</text>
+<text class="atlas-body" x="1056" y="194">Schema-aware prompting</text>
+<text class="atlas-body" x="1056" y="217">Few-shot SQL examples</text>
+<text class="atlas-body" x="1056" y="240">Table and column context</text>
+</g>
+<g id="sql">
+<path class="atlas-panel" d="M48 400h348l22 22v158H48Z"/>
+<use class="atlas-icon" href="#icon-file" x="72" y="422" width="28" height="28"/>
+<text class="atlas-title" x="116" y="444">SQL generation</text>
+<text class="atlas-body" x="72" y="480">BigQuery-compatible SQL</text>
+<text class="atlas-body" x="72" y="503">SELECT payer_type,</text>
+<text class="atlas-body" x="72" y="526">COUNT(*) AS denied…</text>
+</g>
+<g id="dry-run">
+<path class="atlas-gate" d="M564 400h322l24 24v132l-24 24H564l-24-24V424Z"/>
+<use class="atlas-icon" href="#icon-shield" x="564" y="420" width="28" height="28" style="stroke:var(--atlas-signal)"/>
+<text class="atlas-title" x="608" y="444">Dry-run validation</text>
+<text class="atlas-body" x="564" y="480">Syntax and schema checks</text>
+<text class="atlas-body" x="564" y="503">Check field references</text>
+<text class="atlas-body" x="564" y="526">Validate without execution</text>
+</g>
+<g id="semantic">
+<path class="atlas-gate" d="M1056 400h312l24 24v132l-24 24H1056l-24-24V424Z"/>
+<use class="atlas-icon" href="#icon-shield" x="1056" y="420" width="28" height="28" style="stroke:var(--atlas-signal)"/>
+<text class="atlas-title" x="1100" y="444">Semantic review</text>
+<text class="atlas-body" x="1056" y="480">GPT-4 question alignment</text>
+<text class="atlas-body" x="1056" y="503">Verify answer intent</text>
+<text class="atlas-body" x="1056" y="526">Suggest SQL corrections</text>
+</g>
+<g id="export">
+<path d="M60 740h524v190" class="atlas-sheet-back"/>
+<path d="M54 745h528v190" class="atlas-sheet-back"/>
+<path d="M48 750h508l32 32v158H48Z" class="atlas-paper"/>
+<path d="M556 750v32h32" class="atlas-fold"/>
+<path class="atlas-paper-line" d="M72 902h460M72 916h412"/>
+<text class="atlas-title" x="72" y="794">Training data export</text>
+<text class="atlas-body" x="72" y="832">Validated question–SQL pairs</text>
+<text class="atlas-body" x="72" y="855">CSV / JSON datasets</text>
+<text class="atlas-body" x="72" y="878">200 validated pairs</text>
+</g>
+<g id="fine-tuning">
+<rect class="atlas-panel" x="760" y="750" width="632" height="220" rx="12"/>
+<use class="atlas-icon" href="#icon-model" x="784" y="772" width="28" height="28"/>
+<path class="atlas-window-rule" d="M760 812h632"/>
+<text class="atlas-title" x="828" y="794">Model fine-tuning</text>
+<text class="atlas-body" x="784" y="844">davinci-002: deployed</text>
+<text class="atlas-body" x="784" y="867">GCP Model Garden: R&amp;D</text>
+<text class="atlas-body" x="784" y="890">LLaMA / Code LLaMA LoRA</text>
+</g>
+<path class="atlas-rule" d="M48 1020h1344"/>
+<text class="atlas-label" x="48" y="1054">Claims schema</text>
+<text class="atlas-note" x="48" y="1082">claim_id · patient_id</text>
+<text class="atlas-note" x="48" y="1104">icd_10_code · payer_type</text>
+<text class="atlas-label" x="548" y="1054">Warehouse fields</text>
+<text class="atlas-note" x="548" y="1082">claim_status · allowed_amount</text>
+<text class="atlas-note" x="548" y="1104">denial_reason</text>
+<text class="atlas-label" x="1040" y="1054">Domain examples</text>
+<text class="atlas-note" x="1040" y="1082">ICD-10: E11.9 · I10</text>
+<text class="atlas-note" x="1040" y="1104">Medicare · Medicaid · Commercial</text>
+<path class="atlas-rule" d="M48 1140h1344"/>
+<text class="atlas-label" x="48" y="1174">97%+ dry-run validity</text>
+<text class="atlas-note" x="48" y="1202">Syntax and schema validation</text>
+<text class="atlas-note" x="48" y="1224">Not a semantic accuracy measure</text>
+<text class="atlas-label" x="548" y="1174">200 validated pairs</text>
+<text class="atlas-note" x="548" y="1202">Question–SQL training data</text>
+<text class="atlas-note" x="548" y="1224">CSV / JSON export</text>
+<text class="atlas-label" x="1040" y="1174">Two validation stages</text>
+<text class="atlas-note" x="1040" y="1202">BigQuery dry run</text>
+<text class="atlas-note" x="1040" y="1224">GPT-4 semantic review</text>
+</svg></div>
+</main>
+<script src="architecture-viewer.js"></script>
+</body>
+</html>

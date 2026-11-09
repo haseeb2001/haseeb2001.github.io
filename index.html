@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Apply saved theme before first paint — prevents flash -->
-<script>try{const t=localStorage.getItem('mh-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>(()=>{let saved;try{saved=localStorage.getItem('mh-theme')}catch{}const manual=saved==='dark'||saved==='light';document.documentElement.dataset.theme=manual?saved:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.themeSource=manual?'saved':'system'})()</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -65,7 +65,7 @@
       <h1 id="intro-title"><span class="hero-title-line">From models</span><span class="hero-title-line">to <em>production.</em></span></h1>
       <p class="hero-role">Muhammad Haseeb <span aria-hidden="true">/</span> Machine Learning Engineer</p>
       <p class="hero-sub">3+ years building production ML, NLP and agentic AI systems — from feature stores and Kubernetes services to fine-tuned LLMs and RAG pipelines.</p>
-      <p class="hero-bio">My background spans production ML at DEVSINC and LLM research at Texas Tech University. <a href="#about">More about me</a></p>
+      <p class="hero-bio">My background spans production ML at DEVSINC and applied AI research for TxDOT at Texas Tech University. <a href="#about">More about me</a></p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See the work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
         <a class="btn btn-resume" href="assets/resume.pdf" target="_blank" rel="noopener">View résumé <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
@@ -74,24 +74,24 @@
     </div>
     <aside class="hero-evidence" aria-label="Selected production results and research">
       <div class="hero-profile">
-        <img src="assets/photo.jpeg" alt="Muhammad Haseeb" width="96" height="112" fetchpriority="high">
+        <span class="hero-portrait"><img src="assets/photo-portrait-480.jpg" alt="Muhammad Haseeb" width="112" height="140" fetchpriority="high" decoding="async"></span>
         <div><h2>Production work.<br>Research depth.</h2><p>ML engineering &amp; applied research</p></div>
       </div>
       <div class="hero-projects">
+        <a class="hero-project hero-project-claims" href="#claims-text-to-sql">
+          <span class="hero-project-title">Claims Text-to-SQL <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-project-impact">97%+ dry-run validity · 200 validated pairs</span>
+          <span class="hero-project-stack">DEVSINC · BigQuery · GPT-4</span>
+        </a>
+        <a class="hero-project hero-project-ttu" href="#txdot-research">
+          <span class="hero-project-title">TxDOT crash explainability <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          <span class="hero-project-impact">100K+ records · Statistical + LLM analysis</span>
+          <span class="hero-project-stack">Texas Tech · TxDOT · Transportation safety</span>
+        </a>
         <a class="hero-project hero-project-health" href="#healthcare-platform">
           <span class="hero-project-title">Healthcare ML platform <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
           <span class="hero-project-impact">Deployment cycle: 8 to 4 weeks</span>
-          <span class="hero-project-stack">Azure Databricks · MLflow · PySpark</span>
-        </a>
-        <a class="hero-project hero-project-cloud" href="#cloud-platform">
-          <span class="hero-project-title">Cloud DevOps platform <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-          <span class="hero-project-impact">40+ microservices · 99.7% uptime</span>
-          <span class="hero-project-stack">GCP · Kubernetes · Terraform</span>
-        </a>
-        <a class="hero-project hero-project-compliance" href="#smartcompliance">
-          <span class="hero-project-title">SmartCompliance <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-          <span class="hero-project-impact">80% less manual review time</span>
-          <span class="hero-project-stack">Document AI · Hybrid retrieval · LLMs</span>
+          <span class="hero-project-stack">DEVSINC · Databricks · MLflow</span>
         </a>
       </div>
 
@@ -134,12 +134,100 @@
 <section id="work" class="sec">
   <div class="w">
     <div class="sec-hd">
-      <h2 class="sec-title">Systems I’ve shipped</h2><p class="section-note">Architecture, implementation, and measurable impact.</p>
+      <h2 class="sec-title">Systems &amp; applied research</h2><p class="section-note">Production ML at DEVSINC. Applied AI at Texas Tech.</p>
     </div>
 
     <div class="work-cards">
+      <article class="cs-card cs-card-claims" id="claims-text-to-sql">
+        <h3 class="cs-title">Healthcare Claims Text-to-SQL</h3>
+        <div class="cs-meta">
+          <span class="cs-domain">Healthcare · LLM engineering</span>
+          <span class="cs-year">DEVSINC · Deployed model + Model Garden R&amp;D</span>
+        </div>
+        <p class="cs-desc">Schema-grounded GPT-4 prompting turns claims questions into BigQuery SQL. Separate dry-run and semantic checks feed a validated training dataset for fine-tuning, with a deployed davinci-002 model and LLaMA / Code LLaMA LoRA experiments on GCP Model Garden.</p>
+        <div class="cs-metrics">
+          <div class="cs-metric"><span class="cs-mnum">97<small>%+</small></span><span class="cs-mlbl">Dry-run validity</span><span class="cs-mchg">syntax &amp; schema, not answer accuracy</span></div>
+          <div class="cs-metric"><span class="cs-mnum">200</span><span class="cs-mlbl">Validated pairs</span><span class="cs-mchg">question–SQL training data</span></div>
+          <div class="cs-metric"><span class="cs-mnum">2</span><span class="cs-mlbl">Validation stages</span><span class="cs-mchg">dry run · semantic review</span></div>
+        </div>
+        <details class="project-details" id="details-claims-text-to-sql">
+          <summary><span>Explore architecture</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="cs-arch-wrap">
+          <p class="cs-arch-label">System architecture</p>
+          <div class="arch-live arch-live-claims">
+            <iframe src="assets/healthcare_claims_architecture.html?preview=1" title="Animated Healthcare Claims Text-to-SQL architecture" loading="lazy"></iframe>
+          </div>
+          <details class="arch-text" open>
+            <summary>Read text version</summary>
+            <div class="arch-overview" role="group" aria-label="Healthcare Claims Text-to-SQL architecture">
+              <div class="arch-phases"><div class="arch-phase"><h4>Ground the query</h4><ol class="arch-flow"><li class="arch-node"><strong>Claims question</strong><span>Plain-English question about healthcare claims</span></li><li class="arch-node"><strong>BigQuery schema</strong><span>INFORMATION_SCHEMA, field descriptions, columns and CREATE TABLE DDL</span></li><li class="arch-node"><strong>GPT-4 prompting</strong><span>Few-shot SQL examples with table and column context</span></li></ol></div><div class="arch-phase"><h4>Generate & validate</h4><ol class="arch-flow"><li class="arch-node"><strong>SQL generation</strong><span>BigQuery-compatible SQL</span></li><li class="arch-node"><strong>Dry-run validation</strong><span>Syntax, schema and field references; no query execution</span></li><li class="arch-node"><strong>Semantic review</strong><span>GPT-4 checks question alignment and suggests corrections</span></li></ol></div><div class="arch-phase"><h4>Export & iterate</h4><ol class="arch-flow"><li class="arch-node"><strong>Training data</strong><span>200 validated question–SQL pairs exported as CSV / JSON</span></li><li class="arch-node"><strong>Deployed model</strong><span>davinci-002 fine-tuning</span></li><li class="arch-node"><strong>Model Garden experiments</strong><span>LLaMA / Code LLaMA LoRA research on GCP</span></li></ol></div></div>
+              <p class="arch-note">The 97%+ result measures BigQuery dry-run validity. Semantic review is a separate check; Model Garden experiments are distinct from the deployed davinci-002 model.</p>
+            </div>
+          </details>
+          <button class="cs-arch-expand" onclick="openArchModal('assets/healthcare_claims_architecture.html','Healthcare Claims Text-to-SQL Architecture')" aria-label="Open full-size Healthcare Claims Text-to-SQL architecture"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> Open full-size diagram</button>
+        </div>
+        </details>
+          <aside class="project-note" aria-labelledby="note-claims">
+            <h4 id="note-claims">Valid SQL is the first gate</h4>
+            <p>A dry run checks syntax and field references without executing the query. Semantic review then checks alignment with the question. Keeping the two separate makes the 97%+ validity result precise: it does not claim answer correctness.</p>
+          </aside>
+        <div class="cs-foot">
+          <div class="cs-chips"><span class="chip">BigQuery</span><span class="chip">GPT-4</span><span class="chip">Text-to-SQL</span><span class="chip">davinci-002</span><span class="chip">GCP Model Garden</span><span class="chip">LoRA</span></div>
+        </div>
+      </article>
 
-      <!-- ── Healthcare ML Platform (AMERI) ── -->
+      <!-- TTU/TxDOT: content drawn from the existing Graduate Research Assistant entry. -->
+      <article class="cs-card cs-card-ttu" id="txdot-research">
+        <h3 class="cs-title">TxDOT Crash Explainability &amp; Safety Insights</h3>
+        <div class="cs-meta"><span class="cs-domain">Transportation safety · Applied AI</span><span class="cs-year">Texas Tech University · TxDOT research</span></div>
+        <p class="cs-desc">Combining statistical and LLM-based techniques to investigate crash causes, explain contributing factors and uncover recurring patterns. The research aims to help TxDOT stakeholders assess safety precautions and make evidence-informed decisions to reduce crashes.</p>
+        <div class="cs-metrics">
+          <div class="cs-metric"><span class="cs-mnum">100<small>K+</small></span><span class="cs-mlbl">Crash records</span><span class="cs-mchg">automated ETL pipelines</span></div>
+          <div class="cs-metric"><span class="cs-mnum">5<small>+</small></span><span class="cs-mlbl">TxDOT districts</span><span class="cs-mchg">natural-language querying</span></div>
+          <div class="cs-metric"><span class="cs-mnum">4</span><span class="cs-mlbl">Specialised pipelines</span><span class="cs-mchg">local-LLM intent routing</span></div>
+        </div>
+        <details class="project-details" id="details-txdot-research">
+          <summary><span>Explore the research workflow</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="cs-arch-wrap">
+            <div class="ttu-workflow">
+              <div class="ttu-strip" role="group" aria-label="Crash explainability, pattern analysis and safety decision support">
+                <section class="ttu-capability"><div class="ttu-visual" aria-hidden="true"><svg viewBox="0 0 330 190" fill="none" aria-hidden="true">
+                    <path class="ttu-sheet-back" d="M38 16h232v142M28 26h232v142"/>
+                    <rect class="ttu-records" x="18" y="36" width="232" height="138" rx="8"/>
+                    <path class="ttu-rule" d="M18 74h232M84 74v100M154 74v100M18 108h232M18 141h232"/>
+                    <path class="ttu-emphasis" d="M36 55h48m18 0h78M34 91h32m35 0h34m36 0h60M34 125h32m35 0h34m36 0h60M34 158h32m35 0h34m36 0h60"/>
+
+                  </svg></div><h4>Explain crashes</h4><p>Investigate contributing factors with statistical and LLM-based techniques.</p></section>
+                <section class="ttu-capability"><div class="ttu-visual" aria-hidden="true"><svg viewBox="0 0 330 190" fill="none" aria-hidden="true">
+                    <rect class="ttu-records" x="24" y="24" width="112" height="142" rx="6"/>
+                    <rect class="ttu-records" x="194" y="24" width="112" height="142" rx="6"/>
+                    <path class="ttu-rule" d="M42 48h76m-76 46h76m-76 46h76M212 48h76m-76 46h76m-76 46h76"/>
+                    <path class="ttu-route" d="M136 48h58M136 94h58M136 140h58"/>
+                    <path class="ttu-emphasis" d="M42 64h44m-44 46h44m-44 46h44M212 64h44m-44 46h44m-44 46h44"/>
+                  </svg></div><h4>Find patterns</h4><p>Explore recurring patterns across district crash data to understand safety concerns.</p></section>
+                <section class="ttu-capability"><div class="ttu-visual" aria-hidden="true"><svg viewBox="0 0 330 190" fill="none" aria-hidden="true">
+                    <path class="ttu-document" d="M12 45h72l20 20v102H12Z"/>
+                    <path class="ttu-document" d="M118 25h72l20 20v122h-92Z"/>
+                    <path class="ttu-document" d="M224 45h72l20 20v102h-92Z"/>
+                    <path class="ttu-fold" d="M84 45v20h20m86-40v20h20m86 0v20h20"/>
+                    <path class="ttu-rule" d="M29 123h58m-58 16h41m58-16h58m-58 16h41m66-16h58m-58 16h41"/>
+                  </svg></div><h4>Inform precautions</h4><p>Make insights useful to TxDOT stakeholders assessing crash-prevention measures.</p></section>
+              </div>
+              <details class="ttu-read-more">
+                <summary><span>Read more about the research</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+                <div class="ttu-research-notes">
+                  <section><h5>Crash explainability &amp; contributing factors</h5><p>Use statistical and LLM-based techniques to investigate potential root causes and contributing factors. The emphasis is on making crash analysis interpretable and useful for transportation-safety stakeholders.</p></section>
+                  <section><h5>Patterns across district crash data</h5><p>Explore recurring crash patterns across district data to better understand safety concerns. Automated ETL supports 100K+ crash records; agentic RAG enables natural-language querying across 5+ TxDOT districts. A local LLM routes intent across four specialised pipelines.</p></section>
+                  <section><h5>Insights for safety decisions</h5><p>The goal is to help TxDOT stakeholders assess safety precautions and potential crash-prevention measures. LangChain and GenAI support PDF, presentation and poster generation in a React analytics dashboard, making analysis easier to communicate and review.</p></section>
+                </div>
+              </details>
+            </div>
+          </div>
+        </details>
+        <aside class="project-note" aria-labelledby="note-ttu"><h4 id="note-ttu">Explain the crash, inform prevention</h4><p>The research investigates why crashes occur, which patterns recur and what safety precautions TxDOT stakeholders could consider. Statistical and LLM-based analysis supports that work, with the aim of informing decisions that help reduce crashes.</p></aside>
+        <div class="cs-foot"><div class="cs-chips"><span class="chip">Statistical analysis</span><span class="chip">LLM-based analysis</span><span class="chip">Agentic RAG</span><span class="chip">LangChain</span><span class="chip">React</span><span class="chip">ETL</span></div><a class="link-inline" href="#ttu-experience">View TTU experience <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div>
+      </article>
+
       <article class="cs-card" id="healthcare-platform">
         <h3 class="cs-title">Healthcare ML Platform</h3>
         <div class="cs-meta">
@@ -147,6 +235,8 @@
           <span class="cs-year">2022 – 2024 · DEVSINC</span>
         </div>
 
+        <div class="cs-summary-visual">
+          <div class="cs-summary-copy">
         <p class="cs-desc">
           Unified feature store and ML pipeline infrastructure serving risk-scoring models across a large healthcare insurance carrier — with subgroup equity analysis, Unity Catalog data lineage, and champion–challenger validation built in for regulatory auditability.
         </p>
@@ -167,29 +257,49 @@
             <span class="cs-mchg">lineage · registry · equity</span>
           </div>
         </div>
+          </div>
+          <figure class="project-overview" role="img" aria-label="Simplified healthcare pipeline: governed data, risk scoring, and quality and equity checks. Expand the architecture for implementation details.">
+            <svg viewBox="0 0 480 110" fill="none" aria-hidden="true">
+              <path class="overview-connection" d="M130 55H190M290 55H350"/>
+              <path class="overview-arrow" d="m182 50 8 5-8 5m160-10 8 5-8 5"/>
+              <path class="overview-trace" pathLength="100" d="M130 55H190M290 55H350"/>
+              <path class="overview-data" d="M30 31v47c0 20 100 20 100 0V31"/>
+              <ellipse class="overview-data" cx="80" cy="31" rx="50" ry="13"/>
+              <path class="overview-data-ring" d="M30 67c0 20 100 20 100 0"/>
+              <path class="overview-model" d="M190 21h82l18 18v50H190Z"/>
+              <path class="overview-model-mark" d="m208 74 18-24 14 10 27-25m-12 0h12v12"/>
+              <path class="overview-gate" d="M365 20h70l15 15v40l-15 15h-70l-15-15V35Z"/>
+              <path class="overview-check" d="m379 55 14 14 28-30"/>
+            </svg>
+            <figcaption><span>Governed data</span><span>Risk scoring</span><span>Equity checks</span></figcaption>
+          </figure>
+        </div>
         <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <details class="project-details" id="details-healthcare-platform">
+          <summary><span>Explore architecture</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="cs-arch-wrap">
           <p class="cs-arch-label">System architecture</p>
           <div class="arch-live arch-live-healthcare">
             <iframe src="assets/healthcare_ml_architecture.html?preview=1" title="Animated Healthcare ML platform architecture" loading="lazy"></iframe>
           </div>
           <details class="arch-text" open>
-            <summary>Read architecture summary</summary>
+            <summary>Read text version</summary>
           <div class="arch-overview" role="group" aria-label="Healthcare ML platform architecture">
             <div class="arch-phases"><div class="arch-phase"><h4>Data foundation</h4><ol class="arch-flow"><li class="arch-node"><strong>EHR data sources</strong><span>Clinical records, encounters, labs and diagnoses</span></li><li class="arch-node"><strong>Azure Databricks</strong><span>PySpark ETL: normalize, validate and join</span></li><li class="arch-node"><strong>Delta Lake</strong><span>Versioned features with Unity Catalog governance</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Model lifecycle</h4><ol class="arch-flow"><li class="arch-node"><strong>MLflow</strong><span>Experiment tracking and model registry</span></li><li class="arch-node"><strong>XGBoost risk model</strong><span>Versioned clinical risk candidates</span></li><li class="arch-node"><strong>Subgroup evaluation</strong><span>Performance across demographic and clinical cohorts</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Validation &amp; serving</h4><ol class="arch-flow"><li class="arch-node"><strong>Champion–challenger</strong><span>Compare candidates against quality and equity checks</span></li><li class="arch-node"><strong>Batch inference</strong><span>Produce clinical risk scores</span></li><li class="arch-node"><strong>Audit report</strong><span>Reproducible results and supporting evidence</span></li></ol></div></div>
             <p class="arch-note">Traceability across the lifecycle: Unity Catalog lineage, MLflow provenance and subgroup equity reports.</p>
           </div>
           </details>
           <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <button class="cs-arch-expand" onclick="openArchModal('assets/healthcare_ml_architecture.html','Healthcare ML Platform Architecture')" aria-label="Open full-size Healthcare ML platform architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Open full-size diagram
+          </button>
+        </div>
+        </details>
           <aside class="project-note" aria-labelledby="note-healthcare">
             <h4 id="note-healthcare">Trace the score back</h4>
             <p>Batch inference produces scores in runs rather than serving individual live requests. Unity Catalog lineage, MLflow versions and subgroup reports keep the data, model and equity checks visible together.</p>
           </aside>
-          <button class="cs-arch-expand" onclick="openArchModal('assets/healthcare_ml_architecture.html','Healthcare ML Platform Architecture')" aria-label="View detailed Healthcare ML platform architecture">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-            View detailed architecture
-          </button>
-        </div>
         <div class="cs-foot">
           <div class="cs-chips">
             <span class="chip">Azure Databricks</span>
@@ -199,14 +309,13 @@
             <span class="chip">PySpark</span>
             <span class="chip">Unity Catalog</span>
           </div>
-          <a href="assets/healthcare_ml_architecture.html" class="cs-cta">
-            Explore architecture
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
         </div>
       </article>
 
-      <!-- ── Cloud DevOps Platform (IMX) ── -->
+    </div><!-- /.work-cards -->
+    <details class="more-work" id="more-projects">
+      <summary><span>More projects <span class="more-work-count">5 additional projects</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="more-work-cards">
       <article class="cs-card cs-card-g" id="cloud-platform">
         <h3 class="cs-title">Cloud DevOps Platform</h3>
         <div class="cs-meta">
@@ -235,28 +344,31 @@
           </div>
         </div>
         <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <details class="project-details" id="details-cloud-platform">
+          <summary><span>Explore architecture</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="cs-arch-wrap">
           <p class="cs-arch-label">System architecture</p>
           <div class="arch-live arch-live-devops">
             <iframe src="assets/devops_architecture.html?preview=1" title="Animated Cloud DevOps platform architecture" loading="lazy"></iframe>
           </div>
           <details class="arch-text" open>
-            <summary>Read architecture summary</summary>
+            <summary>Read text version</summary>
           <div class="arch-overview" role="group" aria-label="Cloud DevOps platform architecture">
             <div class="arch-phases"><div class="arch-phase"><h4>Build &amp; deploy</h4><ol class="arch-flow"><li class="arch-node"><strong>GitHub Actions</strong><span>Continuous integration and delivery</span></li><li class="arch-node"><strong>Docker</strong><span>Build, tag and publish container images</span></li><li class="arch-node"><strong>Helm</strong><span>Deploy application releases to Kubernetes</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Runtime &amp; metrics</h4><ol class="arch-flow"><li class="arch-node"><strong>GCP Kubernetes</strong><span>40+ containerized microservices</span></li><li class="arch-node"><strong>Managed Prometheus</strong><span>Collectors and exporters capture workload metrics</span></li><li class="arch-node"><strong>Rule evaluator</strong><span>Evaluate thresholds and alert conditions</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Observe &amp; respond</h4><div class="arch-branches"><div><p class="arch-branch-label">Metrics path</p><ol class="arch-flow" aria-label="Metrics visualization"><li class="arch-node"><strong>Monarch DB</strong><span>Managed time-series storage</span></li><li class="arch-node"><strong>Dashboards</strong><span>Prometheus UI, Grafana or Cloud Monitoring</span></li></ol></div><div><p class="arch-branch-label">Alert path</p><ol class="arch-flow" aria-label="Incident response"><li class="arch-node"><strong>Alertmanager</strong><span>Route firing alerts</span></li><li class="arch-node"><strong>Slack &amp; runbooks</strong><span>Triage, internal resolution or owner escalation</span></li></ol></div></div></div></div>
             <p class="arch-note">Provisioning: Terraform manages GCP infrastructure. Managed Prometheus feeds Monarch for dashboards; its rule evaluator feeds Alertmanager for incident response.</p>
           </div>
           </details>
           <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <button class="cs-arch-expand" onclick="openArchModal('assets/devops_architecture.html','Cloud DevOps Platform Architecture')" aria-label="Open full-size Cloud DevOps platform architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Open full-size diagram
+          </button>
+        </div>
+        </details>
           <aside class="project-note" aria-labelledby="note-devops">
             <h4 id="note-devops">From a signal to an owner</h4>
             <p>Dashboards show what changed; alert routing determines who acts. The metrics path feeds Monarch and dashboards, while evaluated rules route through Alertmanager to Slack and runbooks. Both paths matter for incident response.</p>
           </aside>
-          <button class="cs-arch-expand" onclick="openArchModal('assets/devops_architecture.html','Cloud DevOps Platform Architecture')" aria-label="View detailed Cloud DevOps platform architecture">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-            View detailed architecture
-          </button>
-        </div>
         <div class="cs-foot">
           <div class="cs-chips">
             <span class="chip">GCP</span>
@@ -266,7 +378,6 @@
             <span class="chip">Prometheus</span>
             <span class="chip">Grafana</span>
           </div>
-          <span class="cs-wip">Case study in progress</span>
         </div>
       </article>
 
@@ -279,13 +390,13 @@
         </div>
 
         <p class="cs-desc">
-          End-to-end document intelligence pipeline that reads contractor proposals, retrieves relevant sections via hybrid vector search, and generates evidence-grounded compliance verdicts — cutting manual review time by 80%.
+          End-to-end document intelligence pipeline that reads contractor proposals, retrieves relevant sections via hybrid vector search, and generates evidence-grounded compliance verdicts — reducing manual review time by 80%, improving accuracy and helping production start sooner.
         </p>
         <div class="cs-metrics">
           <div class="cs-metric">
             <span class="cs-mnum cs-mnum-o">80<small>%</small></span>
-            <span class="cs-mlbl">Faster Reviews</span>
-            <span class="cs-mchg">vendor proposals</span>
+            <span class="cs-mlbl">Less review time</span>
+            <span class="cs-mchg">manual proposal review</span>
           </div>
           <div class="cs-metric">
             <span class="cs-mnum cs-mnum-o">3</span>
@@ -294,28 +405,31 @@
           </div>
         </div>
         <!-- Full-width animation, with a reflowing text summary for smaller screens. -->
+        <details class="project-details" id="details-smartcompliance">
+          <summary><span>Explore architecture</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="cs-arch-wrap">
           <p class="cs-arch-label">System architecture</p>
           <div class="arch-live arch-live-construction">
             <iframe src="assets/construction_compliance_architecture.html?preview=1" title="Animated SmartCompliance architecture" loading="lazy"></iframe>
           </div>
           <details class="arch-text" open>
-            <summary>Read architecture summary</summary>
+            <summary>Read text version</summary>
           <div class="arch-overview" role="group" aria-label="SmartCompliance architecture">
             <div class="arch-phases"><div class="arch-phase"><h4>Read the proposal</h4><ol class="arch-flow"><li class="arch-node"><strong>Proposal PDF</strong><span>Unstructured contractor submissions</span></li><li class="arch-node"><strong>Azure Document Intelligence</strong><span>Extract text, tables and document sections</span></li><li class="arch-node"><strong>Text chunking</strong><span>Prepare sections for retrieval</span></li></ol><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Retrieve evidence</h4><ol class="arch-flow"><li class="arch-node"><strong>BM25 + embeddings</strong><span>Parallel sparse keyword and dense vector retrieval</span></li><li class="arch-node"><strong>Milvus</strong><span>Hybrid search over indexed proposal content</span></li></ol><p class="arch-support">Dense vectors: OpenAI text-embedding-3-large.</p><svg class="arch-phase-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div><div class="arch-phase"><h4>Evaluate &amp; report</h4><ol class="arch-flow"><li class="arch-node"><strong>LLM comparison</strong><span>Compare retrieved evidence with design requirements</span></li><li class="arch-node"><strong>Compliance verdict</strong><span>Evidence-grounded pass or fail decisions</span></li><li class="arch-node"><strong>Excel report</strong><span>Auditable decisions with supporting evidence</span></li></ol></div></div>
             <p class="arch-note">Review context: 250–300 page proposals against 20–25 page design specifications for contractor shortlisting.</p>
           </div>
           </details>
           <!-- Draft field note: grounded in this architecture; refine with project-specific tradeoffs. -->
+          <button class="cs-arch-expand" onclick="openArchModal('assets/construction_compliance_architecture.html','SmartCompliance Architecture')" aria-label="Open full-size SmartCompliance architecture">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            Open full-size diagram
+          </button>
+        </div>
+        </details>
           <aside class="project-note" aria-labelledby="note-construction">
             <h4 id="note-construction">Retrieve terms and meaning</h4>
             <p>BM25 supports exact keyword matches; embeddings retrieve related wording. The hybrid index brings both into the comparison step. Supporting evidence in the Excel report gives a reviewer something to inspect beyond a pass or fail.</p>
           </aside>
-          <button class="cs-arch-expand" onclick="openArchModal('assets/construction_compliance_architecture.html','SmartCompliance Architecture')" aria-label="View detailed SmartCompliance architecture">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-            View detailed architecture
-          </button>
-        </div>
         <div class="cs-foot">
           <div class="cs-chips">
             <span class="chip">Azure Document Intelligence</span>
@@ -325,14 +439,13 @@
             <span class="chip">text-embedding-3-large</span>
             <span class="chip">FastAPI</span>
           </div>
-          <span class="cs-wip">Case study in progress</span>
         </div>
       </article>
 
-    </div><!-- /.work-cards -->
+    </div><!-- /.more-work-cards -->
 
     <!-- Smaller supplementary projects -->
-    <p class="proj-also">Other projects</p>
+    <p class="proj-also">Additional work</p>
     <div class="proj-grid">
       <div class="proj-card">
         <h3>HealthQuery Intelligence</h3>
@@ -348,6 +461,8 @@
       </div>
     </div>
 
+    </details>
+
   </div>
 </section>
 
@@ -357,11 +472,11 @@
 <section id="experience" class="sec journey-section" data-journey>
   <div class="w">
     <div class="sec-hd">
-      <h2 class="sec-title">Production experience</h2>
+      <h2 class="sec-title">Experience</h2>
     </div>
     <div class="exp-list">
 
-      <div class="exp-entry">
+      <div class="exp-entry" id="ttu-experience">
         <div class="exp-meta">
           <p class="exp-co">Texas Tech University</p>
           <p class="exp-role">Graduate Research Assistant</p>
@@ -370,7 +485,7 @@
           <p class="exp-sub">TxDOT Transportation Safety Research</p>
         </div>
         <ul class="exp-bullets">
-          <li>Conducting applied research on crash causation analysis using statistical and GenAI-integrated frameworks; built a multi-agent NLP chatbot with intent classification (local LLM) routing queries across four specialised pipelines.</li>
+          <li>Researching crash explainability, contributing factors and recurring patterns using statistical and LLM-based techniques to inform TxDOT safety precautions and crash-reduction efforts; built a multi-agent NLP chatbot with intent classification (local LLM) routing queries across four specialised pipelines.</li>
           <li>Engineered an agentic report generation system using LangChain and GenAI for automated PDF, PPT, and poster creation, integrated into a custom React analytics dashboard.</li>
           <li>Designed automated ETL pipelines processing 100K+ district crash records with agentic RAG for natural language querying across 5+ TxDOT districts.</li>
         </ul>
@@ -384,7 +499,7 @@
           <p class="exp-loc">Islamabad, Pakistan</p>
         </div>
         <ul class="exp-bullets">
-          <li>Led AI/ML projects automating construction design requirements using NLP and Generative AI, improving vendor proposal accuracy by 80% while supervising a team of 3 engineers to deliver production solutions.</li>
+          <li>Led AI/ML projects automating construction design requirements using NLP and Generative AI, reducing manual review time by 80% while improving accuracy and enabling quicker production starts. Supervised a team of 3 engineers to deliver production solutions.</li>
           <li>Architected MLOps infrastructure managing Kubernetes clusters on GCP (40+ microservices), implementing monitoring with Prometheus and Grafana, achieving 99.7% uptime and reducing incident response time by 60%.</li>
           <li>Developed a healthcare navigation chatbot using OpenAI and open-source LLMs with LoRA fine-tuning and RAG pipelines, improving domain accuracy from 74% to 88% on disease trends and treatment datasets.</li>
           <li>Spearheaded Azure Databricks Feature Store adoption to eliminate redundant feature engineering across teams, enabling feature reuse and cutting model deployment time from 8 weeks to 4 weeks.</li>
@@ -423,9 +538,9 @@
             WWW Companion '26 · Dubai, UAE
             <span class="pub-badge">First Author</span>
           </div>
-          <p class="pub-title">From Code to Rubrics: A Multimodal Evaluation of LLM Systems for Automated Feedback Generation</p>
-          <p class="pub-authors">Haseeb, M., Amjad, A. I., Amjad, M., &amp; Sheng, V. S. &mdash; <em>Companion Proceedings of The ACM Web Conference 2026</em>, April 13&ndash;17, Dubai. ACM.</p>
-          <p class="paper-abstract">Compared unified vs. multi-agent LLM prompting (Qwen2.5-Coder, GPT-OSS, DeepSeek-R1, Llama-3.3) for automated programming feedback on 57 student submissions. Showed single-role prompts outperform tightly-coupled agent pipelines for introductory tasks; introduced a J1-style thinking judge that substantially improved automated evaluation agreement with human annotators.</p>
+          <h3 class="pub-title">From Code to Rubrics: A Multimodal Evaluation of LLM Systems for Automated Feedback Generation</h3>
+          <p class="pub-authors">Haseeb, M., Amjad, A. I., Amjad, M., &amp; Sheng, V. S.</p>
+          <p class="paper-finding">In this study, single-role prompts outperformed tightly coupled multi-agent pipelines on introductory programming-feedback tasks.</p>
           <div class="paper-links">
             <a class="link-inline" href="https://doi.org/10.1145/3774905.3795458" target="_blank" rel="noopener">
               Read paper
@@ -436,6 +551,11 @@
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
+          <details class="paper-details" id="abstract-www">
+            <summary aria-label="Read abstract and citation: From Code to Rubrics"><span>Read abstract</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p class="paper-abstract">Compared unified vs. multi-agent LLM prompting (Qwen2.5-Coder, GPT-OSS, DeepSeek-R1, Llama-3.3) for automated programming feedback on 57 student submissions. Showed single-role prompts outperform tightly-coupled agent pipelines for introductory tasks; introduced a J1-style thinking judge that substantially improved automated evaluation agreement with human annotators.</p>
+            <p class="pub-citation">Haseeb, M., Amjad, A. I., Amjad, M., &amp; Sheng, V. S. &mdash; <em>Companion Proceedings of The ACM Web Conference 2026</em>, April 13&ndash;17, Dubai. ACM.</p>
+          </details>
         </div>
         <figure class="paper-thumb"><button class="paper-image-button" type="button" onclick="openFig('assets/paper-www-pipeline.png','Unified vs. Multi-Agent Pipeline Architecture — Fig. A.5')" aria-label="Enlarge unified and multi-agent pipeline figure">
           <img src="assets/paper-www-pipeline.png" alt="Unified vs Multi-Agent Pipeline Architecture" width="774" height="400" loading="lazy" decoding="async">
@@ -451,11 +571,11 @@
         <div>
           <div class="pub-venue">
             BEA 2026 @ ACL · San Diego, CA
-            <span class="pub-badge">Presented In Person</span>
+            <span class="pub-badge">First Author · Presented In Person</span>
           </div>
-          <p class="pub-title">Toward Cross-Domain Automated Feedback: A Comparative Evaluation of Open-Source Models across Diverse Student Assessment Types</p>
-          <p class="pub-authors">Haseeb, M., et al. &mdash; <em>21st Workshop on Innovative Use of NLP for Building Educational Applications</em>, ACL 2026.</p>
-          <p class="paper-abstract">Evaluated Qwen 3.5 and DeepSeek R1 for automated feedback generation across three educational domains — programming, writing, and mathematics — using unified and multi-agent prompting strategies. Key finding: no single open-source model dominates all domains; DeepSeek R1 excels at structured tasks while Qwen 3.5 leads on open-ended ones; multi-agent prompting actively degrades performance on tasks requiring coherent reasoning chains.</p>
+          <h3 class="pub-title">Toward Cross-Domain Automated Feedback: A Comparative Evaluation of Open-Source Models across Diverse Student Assessment Types</h3>
+          <p class="pub-authors">Haseeb, M., et al.</p>
+          <p class="paper-finding">Across programming, writing and mathematics, model performance depended on the domain; no single open-source model led throughout.</p>
           <div class="paper-links">
             <a class="link-inline" href="https://aclanthology.org/2026.bea-1.64/" target="_blank" rel="noopener">
               ACL Anthology
@@ -466,19 +586,32 @@
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
+          <details class="paper-details" id="abstract-bea">
+            <summary aria-label="Read abstract and citation: Toward Cross-Domain Automated Feedback"><span>Read abstract</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p class="paper-abstract">Evaluated Qwen 3.5 and DeepSeek R1 for automated feedback generation across three educational domains — programming, writing, and mathematics — using unified and multi-agent prompting strategies. Key finding: no single open-source model dominates all domains; DeepSeek R1 excels at structured tasks while Qwen 3.5 leads on open-ended ones; multi-agent prompting actively degrades performance on tasks requiring coherent reasoning chains.</p>
+            <p class="pub-citation">Haseeb, M., et al. &mdash; <em>21st Workshop on Innovative Use of NLP for Building Educational Applications</em>, ACL 2026.</p>
+          </details>
         </div>
         <figure class="paper-thumb"><button class="paper-image-button" type="button" onclick="openFig('assets/paper-bea-photo.jpg','Presenting at BEA 2026 @ ACL San Diego')" aria-label="Enlarge ACL 2026 presentation photo">
-          <img src="assets/paper-bea-photo.jpg" alt="Presenting BEA 2026 poster at ACL San Diego" width="3002" height="3264" loading="lazy" decoding="async">
+          <img src="assets/paper-bea-photo-720.jpg" srcset="assets/paper-bea-photo-720.jpg 720w, assets/paper-bea-photo-1080.jpg 1080w" sizes="(max-width: 520px) calc(100vw - 40px), (max-width: 680px) 480px, (max-width: 860px) 440px, 360px" alt="Presenting BEA 2026 poster at ACL San Diego" width="3002" height="3264" loading="lazy" decoding="async">
           </button>
           <figcaption>ACL 2026 · San Diego <span>View full photo</span></figcaption>
         </figure>
       </div>
     </div>
 
-    <div class="thesis-entry">
-      <p class="thesis-label">Master's Thesis — In Progress</p>
-      <p class="thesis-title">AI-Driven Feedback and Evaluation Systems for Personalised Learning using LLMs</p>
-      <p class="thesis-desc">Designing and evaluating agentic LLM architectures for automated student feedback generation across programming, math, and writing — building open-source, locally deployable tools as alternatives to proprietary APIs for under-resourced institutions.</p>
+    <div class="thesis-entry" id="masters-thesis">
+      <div class="thesis-summary">
+        <h3 class="thesis-title">AI-Driven Feedback and Evaluation Systems for Personalised Learning using LLMs</h3>
+        <p class="thesis-meta"><span>Master’s thesis · Texas Tech University</span><span class="thesis-status">Completed</span></p>
+        <p class="thesis-desc">Designed and evaluated agentic LLM architectures for automated student feedback, focusing on open-source, locally deployable alternatives to proprietary APIs for under-resourced educational settings.</p>
+        <a class="link-inline" href="https://ttu-ir.tdl.org/items/048bf18a-a528-40f2-9ae9-72e5a424f357" target="_blank" rel="noopener">Read thesis <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M21 13v8H3V3h8"/></svg></a>
+      </div>
+      <dl class="thesis-scope">
+        <div><dt>Assessment domains</dt><dd>Programming, mathematics &amp; writing</dd></div>
+        <div><dt>Research approach</dt><dd>Agentic LLMs · Feedback generation &amp; evaluation</dd></div>
+        <div><dt>Deployment focus</dt><dd>Open-source tools · Local deployment</dd></div>
+      </dl>
     </div>
 
     <div class="poster-entry">
@@ -522,6 +655,7 @@
           <span class="skill-tag">PyTorch</span>
           <span class="skill-tag">TensorFlow</span>
           <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Statistical analysis</span>
           <span class="skill-tag">LangChain</span>
           <span class="skill-tag">LangGraph</span>
           <span class="skill-tag">AutoGen</span>
@@ -557,6 +691,7 @@
         <h4>Cloud &amp; Data</h4>
         <div class="skill-tags">
           <span class="skill-tag">GCP</span>
+          <span class="skill-tag">BigQuery</span>
           <span class="skill-tag">AWS</span>
           <span class="skill-tag">Azure</span>
           <span class="skill-tag">Delta Lake</span>
@@ -597,8 +732,8 @@
       At DEVSINC I led ML engineering across healthcare insurance, construction-tech, and cloud DevOps
       engagements — including an Azure Databricks feature store adoption that cut model deployment
       time in half, and a GCP Kubernetes platform that became the backbone for a large client's
-      production ML workloads. I'm now a Graduate Research Assistant at Texas Tech University, working
-      on AI-driven feedback and evaluation systems for personalised learning using LLMs across
+      production ML workloads. At Texas Tech University, my TxDOT work combines statistical and LLM-based
+      analysis of crash causes and patterns to support stakeholder safety decisions. I also research AI-driven feedback and evaluation systems for personalised learning using LLMs across
       programming, math, and writing domains — with two papers accepted at top-tier venues.
     </p>
   </div>
@@ -617,7 +752,7 @@
         <div>
           <p class="edu-school">Texas Tech University, Lubbock, TX</p>
           <p class="edu-degree">Master's in Computer Science</p>
-          <p class="edu-gpa">CGPA: 4.0 / 4.0</p>
+          <p class="edu-gpa">CGPA: 3.88 / 4.0</p>
         </div>
         <span class="edu-date">Jan 2025 – Jul 2026</span>
       </div>
@@ -657,17 +792,45 @@
 
 <footer id="contact" class="site-footer journey-section" data-journey>
   <div class="w">
-    <h2 class="footer-title">Let’s talk ML engineering.</h2>
-    <p class="footer-sub">Lubbock, Texas</p>
-    <div class="footer-links">
-      <a class="btn btn-primary" href="mailto:haseebmuhammad029@gmail.com">haseebmuhammad029@gmail.com</a>
-      <a class="btn" href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2 1 8l11 6 9-4.91V17h2V8L12 2zM5 13.18v4.16C5 19.7 8.13 21.5 12 21.5s7-1.8 7-4.16v-4.16l-7 3.82-7-3.82z"/></svg>
-        Google Scholar
-      </a>
+    <div class="contact-layout">
+      <div class="contact-intro">
+        <h2 class="footer-title">Good systems start with a conversation.</h2>
+        <p class="contact-lead">An ML engineering role, a system to build, or a research question. Choose a starting point and make it yours.</p>
+        <p class="contact-location">Lubbock, Texas <span aria-hidden="true">·</span> <time id="contactLocalTime">Central Time</time></p>
+        <div class="contact-address">
+          <a href="mailto:haseebmuhammad029@gmail.com" id="contactEmail">haseebmuhammad029@gmail.com</a>
+          <button class="contact-copy" id="copyEmail" type="button" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg><span>Copy address</span></button>
+        </div>
+        <div class="contact-resources">
+          <a class="link-inline" href="assets/resume.pdf" target="_blank" rel="noopener">View résumé <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg></a>
+          <a class="link-inline" href="assets/muhammad-haseeb.vcf" download>Save contact <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5 17c0-5 8-5 8 0m2-8h3m-3 4h3"/></svg></a>
+        </div>
+        <nav class="contact-profiles" aria-label="Contact profiles">
+          <a href="https://www.linkedin.com/in/muhammad-haseeb04" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/haseeb2001" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://scholar.google.com/citations?view_op=list_works&amp;hl=en&amp;user=Ri3UeNwAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+        </nav>
+      </div>
+      <section class="contact-composer" id="contactComposer" aria-label="Prepare an email" hidden>
+        <fieldset class="contact-topics">
+          <legend>What would you like to discuss?</legend>
+          <label><input type="radio" name="contact-topic" value="role" checked><span><strong>An ML / AI engineering role</strong><small>Role, team &amp; what you’re building</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></label>
+          <label><input type="radio" name="contact-topic" value="engineering"><span><strong>A system or technical question</strong><small>LLMs, deployment &amp; production ML</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></label>
+          <label><input type="radio" name="contact-topic" value="research"><span><strong>A research collaboration</strong><small>LLM evaluation &amp; automated feedback</small></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></label>
+        </fieldset>
+        <div class="contact-draft">
+          <p class="contact-subject">Subject <strong id="contactSubject"></strong></p>
+          <label class="contact-message-label" for="contactMessage">Your starting draft <span>Edit before opening your email app.</span></label>
+          <textarea id="contactMessage" rows="8" spellcheck="true"></textarea>
+          <div class="contact-draft-actions">
+            <a class="btn btn-primary" id="contactMailto" href="mailto:haseebmuhammad029@gmail.com">Open email draft <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h18v14H3zm0 0 9 8 9-8"/></svg></a>
+            <button class="contact-copy" id="copyDraft" type="button"><span>Copy draft</span></button>
+          </div>
+          <p class="contact-draft-help">Opens your email app, where you can review and send.</p>
+        </div>
+      </section>
     </div>
+    <p class="contact-status" id="contactStatus" role="status" aria-live="polite" aria-atomic="true"></p>
     <div class="footer-motion">
       <button class="motion-toggle" data-motion-control data-motion-context="page" type="button" aria-pressed="true" aria-label="Pause page background animation">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
@@ -747,14 +910,29 @@
     }
   }
 
-  // Init
-  syncToggle(html.getAttribute('data-theme') || 'dark');
-
+  const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+  let hasThemeChoice = html.dataset.themeSource === 'saved';
+  function applyTheme(theme) {
+    html.dataset.theme = theme;
+    html.dataset.themeSource = hasThemeChoice ? 'saved' : 'system';
+    syncToggle(theme);
+  }
+  applyTheme(html.dataset.theme);
+  systemTheme.addEventListener('change', event => {
+    if (!hasThemeChoice) applyTheme(event.matches ? 'dark' : 'light');
+  });
   btn.addEventListener('click', () => {
-    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    html.setAttribute('data-theme', next);
-    try { localStorage.setItem('mh-theme', next); } catch(e) {}
-    syncToggle(next);
+    hasThemeChoice = true;
+    const next = html.dataset.theme === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem('mh-theme', next); } catch {}
+    applyTheme(next);
+  });
+  // Keep other tabs aligned when the visitor changes or clears their preference.
+  addEventListener('storage', event => {
+    if (event.key !== 'mh-theme' && event.key !== null) return;
+    const saved = event.key === null ? null : event.newValue;
+    hasThemeChoice = saved === 'dark' || saved === 'light';
+    applyTheme(hasThemeChoice ? saved : systemTheme.matches ? 'dark' : 'light');
   });
 
   // Figure lightbox

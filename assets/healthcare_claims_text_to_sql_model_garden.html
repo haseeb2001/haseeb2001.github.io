@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Healthcare Claims Text-to-SQL Pipeline</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#060f1b;color:#e8f5ff;font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}.top{max-width:1920px;margin:0 auto;padding:25px 26px 13px;display:flex;align-items:center;justify-content:space-between;gap:15px}.eyebrow{font:600 10px ui-monospace,monospace;letter-spacing:3px;color:#66a9cb}.top h1{margin:8px 0 5px;font-size:clamp(22px,2.3vw,33px);font-weight:720;letter-spacing:-.7px}.top p{margin:0;color:#7fa0b6;font-size:12px}.buttons{display:flex;gap:9px}.buttons button{border:1px solid #36556a;background:#0b2232;color:#c8ebff;padding:9px 14px;border-radius:8px;cursor:pointer;font:600 12px ui-monospace,monospace}.buttons button:hover{background:#153b51}.viewport{overflow-x:auto;padding:0 18px 14px}.stage{width:1920px;max-width:none;margin:auto;box-shadow:0 12px 55px #0005;border:1px solid #254056;border-radius:14px;overflow:hidden;background:#071626}.stage svg{display:block;width:100%;height:auto}.nodebg{fill:#0c2133;stroke:#35556a;stroke-width:1.15}.node:hover .nodebg{stroke:#70c5e7;fill:#10283b}.step{font:600 11px ui-monospace,monospace;letter-spacing:1.8px;fill:#78a4bc}.name{font:700 20px Inter,ui-sans-serif,system-ui;fill:#e5f6ff}.subtitle{font:500 11.5px Inter,ui-sans-serif,system-ui;fill:#8fb2c6}.detail{font:500 11.5px ui-monospace,monospace;fill:#b3d3df}.tag{font:700 10px ui-monospace,monospace;letter-spacing:1.3px}.flowline{fill:none;stroke-width:2;stroke-dasharray:5 6;opacity:.9;animation:flow .7s linear infinite}@keyframes flow{to{stroke-dashoffset:-22}}.pulse{animation:pulse 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pulse{50%{opacity:.35}}.scan{animation:scan 3.4s linear infinite}@keyframes scan{0%{transform:translateX(0)}50%{transform:translateX(150px)}100%{transform:translateX(0)}}.heartbeat{animation:beat 2.8s ease-in-out infinite}@keyframes beat{50%{opacity:.28}}.foot{padding:0 28px 28px;max-width:1920px;margin:auto;color:#65899f;font:11px ui-monospace,monospace}.paused *, .paused *:before,.paused *:after{animation-play-state:paused!important}.paused svg{animation-play-state:paused!important}@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.viewport{padding:0 9px 12px}.foot{padding:0 12px 22px}}
+</style></head><body><header class="top"><div><div class="eyebrow">HEALTHCARE ANALYTICS / LANGUAGE-TO-DATA ARCHITECTURE</div><h1>Healthcare Claims Text-to-SQL Pipeline</h1><p>Schema-grounded SQL generation · Two-stage validation · Training data flywheel</p></div><div class="buttons"><button id="toggle">Ⅱ Pause</button><button id="restart">↻ Restart</button></div></header><main class="viewport"><div class="stage" id="stage"><svg viewBox="0 0 1920 825" role="img" aria-label="Eight-stage healthcare claims text-to-SQL pipeline, flowing from natural language to fine-tuning through BigQuery schema extraction and two validation stages" xmlns="http://www.w3.org/2000/svg"><defs>
+<pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#315269" stroke-opacity=".24" stroke-width=".7"/></pattern><pattern id="biggrid" width="130" height="130" patternUnits="userSpaceOnUse"><path d="M130 0H0V130" fill="none" stroke="#426b85" stroke-opacity=".22" stroke-width="1.1"/></pattern><radialGradient id="bg"><stop stop-color="#12364b"/><stop offset="1" stop-color="#071626"/></radialGradient><filter id="glow"><feGaussianBlur stdDeviation="2"/></filter>
+<symbol id="ico1" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4zM8 9h8m-8 4h5"/></symbol>
+<symbol id="ico2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol>
+<symbol id="ico3" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m9 8-4 4 4 4m6-8 4 4-4 4m-3-10-1 12"/></symbol>
+<symbol id="ico4" viewBox="0 0 24 24"><path d="M8 6 3 12l5 6m8-12 5 6-5 6m-4-14-2 16"/></symbol>
+<symbol id="ico5" viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="ico6" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9M12 3v9h9M8 16l2 2 5-5"/></symbol>
+<symbol id="ico7" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8m-8 4h8"/></symbol>
+<symbol id="ico8" viewBox="0 0 24 24"><path d="M4 17l8-13 8 13M7 17h10M12 10v11m-4 0h8"/></symbol>
+<symbol id="bq" viewBox="0 0 50 50"><circle cx="23" cy="23" r="17" stroke="#62b7ff" stroke-width="5" fill="none"/><path d="m35 35 10 10" stroke="#62b7ff" stroke-width="6" stroke-linecap="round"/><path d="M14 29V20m7 9V14m7 15V18" stroke="#54e3a0" stroke-width="3.5" stroke-linecap="round"/></symbol>
+</defs>
+<rect width="1920" height="825" fill="url(#bg)"/><rect width="1920" height="825" fill="url(#grid)"/><rect width="1920" height="825" fill="url(#biggrid)"/>
+<!-- Subtle hospital and warehouse skyline -->
+<g opacity=".16" stroke="#467d91" stroke-width="2" fill="#0d3042"><path d="M0 160h140v-40h32v40h90V90h70v70h80V125h50v35h130V84h88v76h160v-56h80v56h125v-40h90v40h170v-64h110v64h140v-38h70v38h165v-55h115v55h145v-70h60v70h90"/><path d="M605 84V43h55v41M619 63h27m-14-14v28" stroke="#75bed2"/><path d="M1450 160V65h160v95M1470 86h120m-120 20h120m-120 20h120"/></g>
+<text x="39" y="66" fill="#9ed7f3" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">01  QUERY &amp; SCHEMA CONTEXT</text><path d="M38 81H734" stroke="#3d779c" opacity=".6"/>
+<text x="765" y="66" fill="#9ed7f3" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">02  GENERATE &amp; VALIDATE</text><path d="M765 81H1441" stroke="#3d779c" opacity=".6"/>
+<text x="1475" y="66" fill="#82e2b7" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">03  EXPORT &amp; FINE-TUNE</text><path d="M1475 81H1878" stroke="#3b8c7e" opacity=".6"/>
+<text x="39" y="136" fill="#6f9bb3" font-family="ui-monospace,monospace" font-size="11" letter-spacing="1.2">CLAIMS DATA WAREHOUSE / SQL QUALITY GATES</text>
+<use href="#bq" x="1787" y="102" width="42" height="42"/><text x="1842" y="120" font-size="11" fill="#9dd0ec" font-family="ui-monospace,monospace">BIGQUERY</text><text x="1842" y="136" font-size="9" fill="#608ca5" font-family="ui-monospace,monospace">WAREHOUSE</text>
+<g class="node node-1" transform="translate(38 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#4D9BFF" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 01</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#4D9BFF" opacity=".12" stroke="#4D9BFF" stroke-opacity=".5"/><use href="#ico1" x="6" y="6" width="22" height="22" stroke="#4D9BFF" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">Natural Language</text><text x="18" y="109" class="name">Query</text>
+ <text x="18" y="139" class="subtitle">Plain-English claims question</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">“Which payer has the</text><text x="18" y="208" class="detail">highest denied claims?”</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#4D9BFF" fill-opacity=".07" stroke="#4D9BFF" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#4D9BFF">INPUT</text>
+ </g>
+<path d="M255 362 H267" class="flowline" stroke="#4D9BFF"/><path d="M261 358 L267 362 L261 366" fill="none" stroke="#4D9BFF" stroke-width="1.8"/>
+ <circle r="3.2" fill="#4D9BFF" filter="url(#glow)"><animateMotion dur="1.40s" begin="0.00s" repeatCount="indefinite" path="M255 362 H267"/></circle>
+<g class="node node-2" transform="translate(273 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#4D9BFF" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 02</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#4D9BFF" opacity=".12" stroke="#4D9BFF" stroke-opacity=".5"/><use href="#ico2" x="6" y="6" width="22" height="22" stroke="#4D9BFF" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">Schema</text><text x="18" y="109" class="name">Extraction</text>
+ <text x="18" y="139" class="subtitle">BigQuery INFORMATION_SCHEMA</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">Field descriptions</text><text x="18" y="208" class="detail">Columns + CREATE TABLE DDL</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#4D9BFF" fill-opacity=".07" stroke="#4D9BFF" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#4D9BFF">METADATA</text>
+ </g>
+<path d="M490 362 H502" class="flowline" stroke="#4D9BFF"/><path d="M496 358 L502 362 L496 366" fill="none" stroke="#4D9BFF" stroke-width="1.8"/>
+ <circle r="3.2" fill="#4D9BFF" filter="url(#glow)"><animateMotion dur="1.49s" begin="0.17s" repeatCount="indefinite" path="M490 362 H502"/></circle>
+<g class="node node-3" transform="translate(508 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#62b5ff" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 03</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#62b5ff" opacity=".12" stroke="#62b5ff" stroke-opacity=".5"/><use href="#ico3" x="6" y="6" width="22" height="22" stroke="#62b5ff" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">GPT-4 Prompt</text><text x="18" y="109" class="name">Engine</text>
+ <text x="18" y="139" class="subtitle">Schema-aware prompting</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">Few-shot SQL examples</text><text x="18" y="208" class="detail">Table and column context</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#62b5ff" fill-opacity=".07" stroke="#62b5ff" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#62b5ff">PROMPT</text>
+ </g>
+<path d="M725 362 H737" class="flowline" stroke="#62b5ff"/><path d="M731 358 L737 362 L731 366" fill="none" stroke="#62b5ff" stroke-width="1.8"/>
+ <circle r="3.2" fill="#62b5ff" filter="url(#glow)"><animateMotion dur="1.58s" begin="0.34s" repeatCount="indefinite" path="M725 362 H737"/></circle>
+<g class="node node-4" transform="translate(743 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#69d4ef" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 04</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#69d4ef" opacity=".12" stroke="#69d4ef" stroke-opacity=".5"/><use href="#ico4" x="6" y="6" width="22" height="22" stroke="#69d4ef" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">SQL</text><text x="18" y="109" class="name">Generation</text>
+ <text x="18" y="139" class="subtitle">BigQuery-compatible SQL</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">SELECT payer_type,</text><text x="18" y="208" class="detail">COUNT(*) AS denied…</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#69d4ef" fill-opacity=".07" stroke="#69d4ef" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#69d4ef">GENERATED SQL</text>
+ </g>
+<path d="M960 362 H972" class="flowline" stroke="#69d4ef"/><path d="M966 358 L972 362 L966 366" fill="none" stroke="#69d4ef" stroke-width="1.8"/>
+ <circle r="3.2" fill="#69d4ef" filter="url(#glow)"><animateMotion dur="1.67s" begin="0.51s" repeatCount="indefinite" path="M960 362 H972"/></circle>
+<g class="node node-5" transform="translate(978 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#69d4ef" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 05</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#69d4ef" opacity=".12" stroke="#69d4ef" stroke-opacity=".5"/><use href="#ico5" x="6" y="6" width="22" height="22" stroke="#69d4ef" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">Stage 1 · Dry Run</text><text x="18" y="109" class="name">Validation</text>
+ <text x="18" y="139" class="subtitle">BigQuery syntax + schema</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">Check field references</text><text x="18" y="208" class="detail">Validate without execution</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#69d4ef" fill-opacity=".07" stroke="#69d4ef" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#69d4ef">DRY RUN</text>
+ </g>
+<path d="M1195 362 H1207" class="flowline" stroke="#69d4ef"/><path d="M1201 358 L1207 362 L1201 366" fill="none" stroke="#69d4ef" stroke-width="1.8"/>
+ <circle r="3.2" fill="#69d4ef" filter="url(#glow)"><animateMotion dur="1.76s" begin="0.68s" repeatCount="indefinite" path="M1195 362 H1207"/></circle>
+<g class="node node-6" transform="translate(1213 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#ffc46b" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 06</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#ffc46b" opacity=".12" stroke="#ffc46b" stroke-opacity=".5"/><use href="#ico6" x="6" y="6" width="22" height="22" stroke="#ffc46b" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">Stage 2 · Semantic</text><text x="18" y="109" class="name">Review</text>
+ <text x="18" y="139" class="subtitle">GPT-4 question alignment</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">Verify answer intent</text><text x="18" y="208" class="detail">Suggest SQL corrections</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#ffc46b" fill-opacity=".07" stroke="#ffc46b" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#ffc46b">SEMANTIC CHECK</text>
+ </g>
+<path d="M1430 362 H1442" class="flowline" stroke="#ffc46b"/><path d="M1436 358 L1442 362 L1436 366" fill="none" stroke="#ffc46b" stroke-width="1.8"/>
+ <circle r="3.2" fill="#ffc46b" filter="url(#glow)"><animateMotion dur="1.85s" begin="0.85s" repeatCount="indefinite" path="M1430 362 H1442"/></circle>
+<g class="node node-7" transform="translate(1448 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#54e3a0" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 07</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#54e3a0" opacity=".12" stroke="#54e3a0" stroke-opacity=".5"/><use href="#ico7" x="6" y="6" width="22" height="22" stroke="#54e3a0" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <text x="18" y="83" class="name">Training Data</text><text x="18" y="109" class="name">Export</text>
+ <text x="18" y="139" class="subtitle">Validated NL ↔ SQL pairs</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="186" class="detail">CSV / JSON datasets</text><text x="18" y="208" class="detail">200 validated pairs</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#54e3a0" fill-opacity=".07" stroke="#54e3a0" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#54e3a0">EXPORT</text>
+ </g>
+<path d="M1665 362 H1677" class="flowline" stroke="#54e3a0"/><path d="M1671 358 L1677 362 L1671 366" fill="none" stroke="#54e3a0" stroke-width="1.8"/>
+ <circle r="3.2" fill="#54e3a0" filter="url(#glow)"><animateMotion dur="1.94s" begin="1.02s" repeatCount="indefinite" path="M1665 362 H1677"/></circle>
+<g class="node node-8" transform="translate(1683 215)">
+ <rect class="nodebg" width="214" height="296" rx="15"/>
+ <path d="M 16 0 H 198" stroke="#54e3a0" stroke-width="3" opacity=".82"/>
+ <text x="18" y="30" class="step">STEP 08</text>
+ <g transform="translate(165 14)"><circle cx="17" cy="17" r="17" fill="#54e3a0" opacity=".12" stroke="#54e3a0" stroke-opacity=".5"/><path d="M8 24h19c7 0 7-10 1-11-2-8-13-9-17-2-7 0-9 10-3 13Z" stroke="#54e3a0" fill="none" stroke-width="2" stroke-linejoin="round"/><path d="M13 19h13" stroke="#4D9BFF" stroke-width="2"/></g>
+ <text x="18" y="83" class="name">Model</text><text x="18" y="109" class="name">Fine-tuning</text>
+ <text x="18" y="139" class="subtitle">Deployed + GCP experiments</text>
+ <path d="M18 157 H196" stroke="#2c4a5e" stroke-width="1"/>
+ <text x="18" y="184" class="detail" font-size="10.5">davinci-002 · DEPLOYED</text>
+ <text x="18" y="204" class="detail" font-size="10.5">GCP Model Garden · R&amp;D</text>
+ <text x="18" y="224" class="detail" font-size="10.5">LLaMA / Code LLaMA LoRA</text>
+ <rect x="18" y="242" width="178" height="35" rx="7" fill="#54e3a0" fill-opacity=".07" stroke="#54e3a0" stroke-opacity=".26"/>
+ <text x="107" y="264" text-anchor="middle" class="tag" fill="#54e3a0">FINE-TUNE / EVALUATE</text>
+ </g>
+<!-- Schema vocabulary -->
+<g transform="translate(38 557)"><rect width="1176" height="112" rx="13" fill="#0a2234" stroke="#33566c"/><text x="19" y="27" fill="#7db9d9" font-size="11" font-family="ui-monospace,monospace" letter-spacing="1.5">CLAIMS SCHEMA / DOMAIN SIGNALS</text><g font-family="ui-monospace,monospace" font-size="12" fill="#b4d6e6"><text x="19" y="59">claim_id</text><text x="169" y="59">patient_id</text><text x="330" y="59">icd_10_code</text><text x="522" y="59">payer_type</text><text x="695" y="59">claim_status</text><text x="890" y="59">allowed_amount</text><text x="19" y="88" fill="#7dabc1">ICD-10: E11.9 · I10</text><text x="330" y="88" fill="#7dabc1">PAYER: Medicare · Medicaid · Commercial</text><text x="890" y="88" fill="#7dabc1">denial_reason</text></g></g>
+<!-- Metrics callout -->
+<g transform="translate(1240 557)"><rect width="639" height="112" rx="13" fill="#0d2b35" stroke="#3c987c"/><circle cx="28" cy="30" r="7" fill="#54e3a0" class="heartbeat"/><text x="46" y="34" fill="#9fe9c9" font-size="12" font-family="ui-monospace,monospace" letter-spacing="1.5">VALIDATION PERFORMANCE</text><text x="24" y="72" fill="#f1fff9" font-size="21" font-weight="700">97%+ dry-run validity</text><text x="24" y="96" fill="#9bc7b8" font-size="13">200 validated pairs · Two-stage validation</text></g>
+<g transform="translate(38 705)"><path d="M0 0H1841" stroke="#36576c"/><text x="0" y="30" fill="#85adc2" font-family="ui-monospace,monospace" font-size="11" letter-spacing="1.2">FLOW: NATURAL LANGUAGE → SCHEMA-GROUNDED SQL → VALIDATION → TRAINING DATA → MODEL ITERATION</text><text x="0" y="61" fill="#5d879e" font-family="ui-monospace,monospace" font-size="10">REFERENCE ARCHITECTURE · DAVINCI-002 DEPLOYMENT / GCP MODEL GARDEN LLAMA EXPERIMENTS</text></g>
+</svg></div></main><footer class="foot">INTERACTIVE ARCHITECTURE · SCROLL HORIZONTALLY ON SMALLER SCREENS · ALL ANIMATIONS RUN LOCALLY</footer><script>const stage=document.getElementById('stage'),toggle=document.getElementById('toggle');toggle.onclick=()=>{const paused=stage.classList.toggle('paused');const svg=stage.querySelector('svg');if(paused)svg.pauseAnimations();else svg.unpauseAnimations();toggle.textContent=paused?'▶ Resume':'Ⅱ Pause'};document.getElementById('restart').onclick=()=>{stage.classList.remove('paused');const svg=stage.querySelector('svg');svg.setCurrentTime(0);svg.unpauseAnimations();toggle.textContent='Ⅱ Pause'};</script></body></html>
