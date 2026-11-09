@@ -131,6 +131,11 @@ ul { list-style: none; padding: 0; }
 .sec-title { font: 400 clamp(2rem, 3.5vw, 3rem)/1.15 var(--fh); letter-spacing: -.02em; }
 .section-note { font-size: .875rem; color: var(--fg-m); }
 .about-text { max-width: 74ch; color: var(--fg-m); }
+.about-body { min-width: 0; }
+.about-quote { margin-top: 24px; }
+.about-quote blockquote { font: 400 1.25rem/1.5 var(--fh); color: var(--fg); }
+.about-quote figcaption { margin-top: 6px; font-size: .8125rem; color: var(--fg-sub); }
+.about-quote cite { font-style: normal; }
 #about { padding-block: var(--section-space) 0; }
 #about > .w { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; }
 
