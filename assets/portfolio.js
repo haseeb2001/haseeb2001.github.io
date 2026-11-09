@@ -16,6 +16,80 @@
   new MutationObserver(() => architectureFrames.forEach(sendArchitectureTheme)).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   architectureFrames.forEach(sendArchitectureTheme);
 
+  const composer = document.getElementById('contactComposer');
+  if (composer) {
+    const email = document.getElementById('contactEmail').textContent.trim();
+    const subject = document.getElementById('contactSubject');
+    const message = document.getElementById('contactMessage');
+    const mailto = document.getElementById('contactMailto');
+    const status = document.getElementById('contactStatus');
+    const topics = {
+      role: { subject: 'ML / AI engineering opportunity', body: "Hi Haseeb,\n\nI'd like to discuss an ML / AI engineering opportunity.\n\nRole and team:\nWhat we're building:\nRole or company link:\n\nBest,\n" },
+      engineering: { subject: 'Let’s discuss a production ML system', body: "Hi Haseeb,\n\nI'd like to discuss a system or technical question.\n\nThe problem:\nCurrent approach:\nWhat I'd like to explore:\n\nBest,\n" },
+      research: { subject: 'Research collaboration — LLM evaluation', body: "Hi Haseeb,\n\nI'd like to explore a research collaboration.\n\nResearch question:\nRelevant paper or project:\nPossible collaboration:\n\nBest,\n" }
+    };
+    let selected = 'role';
+    const drafts = new Map(Object.entries(topics).map(([key, value]) => [key, value.body]));
+    function syncEmailDraft() {
+      subject.textContent = topics[selected].subject;
+      mailto.href = `mailto:${email}?subject=${encodeURIComponent(topics[selected].subject)}&body=${encodeURIComponent(message.value)}`;
+    }
+    composer.querySelectorAll('[name="contact-topic"]').forEach(radio => radio.addEventListener('change', () => {
+      if (!radio.checked) return;
+      drafts.set(selected, message.value);
+      selected = radio.value;
+      message.value = drafts.get(selected);
+      status.textContent = '';
+      syncEmailDraft();
+    }));
+    message.addEventListener('input', () => { drafts.set(selected, message.value); syncEmailDraft(); });
+    message.value = drafts.get(selected);
+    syncEmailDraft();
+    composer.hidden = false;
+    const copyEmail = document.getElementById('copyEmail');
+    copyEmail.hidden = false;
+    const timers = new Map();
+    async function copyContactText(button, text, draft) {
+      clearTimeout(timers.get(button));
+      const label = button.querySelector('span');
+      const idle = draft ? 'Copy draft' : 'Copy address';
+      button.disabled = true;
+      label.textContent = 'Copying…';
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(text);
+        label.textContent = 'Copied';
+        status.textContent = draft ? 'Draft copied. Paste it into your preferred email app.' : 'Email address copied.';
+        timers.set(button, setTimeout(() => { label.textContent = idle; }, 2200));
+      } catch {
+        label.textContent = idle;
+        if (draft) {
+          message.focus();
+          message.select();
+          status.textContent = 'Copy is unavailable here. Your message is selected; use your device’s copy command.';
+        } else {
+          const range = document.createRange();
+          range.selectNodeContents(document.getElementById('contactEmail'));
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          status.textContent = 'Copy is unavailable here. The address is selected; use your device’s copy command.';
+        }
+      } finally { button.disabled = false; }
+    }
+    copyEmail.addEventListener('click', () => copyContactText(copyEmail, email, false));
+    document.getElementById('copyDraft').addEventListener('click', event => copyContactText(event.currentTarget, `To: ${email}\nSubject: ${topics[selected].subject}\n\n${message.value}`, true));
+    const clock = document.getElementById('contactLocalTime');
+    function updateContactTime() {
+      const now = new Date();
+      clock.dateTime = now.toISOString();
+      clock.textContent = new Intl.DateTimeFormat('en-US', {timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit', timeZoneName: 'short'}).format(now);
+    }
+    updateContactTime();
+    setInterval(() => { if (!document.hidden) updateContactTime(); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) updateContactTime(); });
+  }
+
   const hero = document.querySelector('.hero');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const motionControls = [...document.querySelectorAll('[data-motion-control]')];
