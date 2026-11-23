@@ -187,6 +187,7 @@ ul { list-style: none; padding: 0; }
 .arch-live-claims iframe { height: calc(100cqw * 0.881944 + 52px); }
 .arch-live-devops iframe { height: calc(100cqw * 0.847222 + 52px); }
 .arch-live-construction iframe { height: calc(100cqw * 0.722222 + 52px); }
+.arch-live-clinical-documents iframe { height: calc(100cqw * 0.633333 + 52px); }
 .arch-text > summary { width: fit-content; padding-block: 12px; min-height: 44px; color: var(--fg-m); cursor: pointer; font-size: .875rem; }
 .arch-text > summary:is(:hover, :focus-visible) { color: var(--accent); }
 @media (min-width: 1200px) {
@@ -248,6 +249,9 @@ ul { list-style: none; padding: 0; }
 .arch-branch-label { color: var(--fg-sub); font-size: .75rem; margin-bottom: 8px; }
 .arch-support { margin-top: 16px; color: var(--fg-sub); font-size: .8125rem; }
 .arch-note { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-s); color: var(--fg-m); font-size: .8125rem; line-height: 1.6; }
+.clinical-engineering { display: grid; gap: 20px; max-width: 74ch; margin-top: 24px; }
+.clinical-engineering h4 { margin-bottom: 6px; font-size: .9375rem; font-weight: 600; }
+.clinical-engineering p { color: var(--fg-m); font-size: .875rem; line-height: 1.65; }
 @media (max-width: 760px) {
   .arch-overview { padding: 20px; }
   .arch-phases { grid-template-columns: 1fr; gap: 40px; }

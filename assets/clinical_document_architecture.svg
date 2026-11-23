@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="atlas" viewBox="0 0 1440 912" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">Clinical Trial Document Intelligence</title>
+<desc id="diagram-description">An upload event starts an orchestrated pipeline that extracts clinical document sections and creates contextual passages. Embedding similarity retrieves vocabulary candidates, and a language model selects from the shortlist. The structured results support protocol authoring workflows.</desc>
+<style>.atlas {--atlas-bg:#181b20;--atlas-title:#eeebe5;--atlas-body:#cbd1da;--atlas-note:#b7c2cf;--atlas-rule:#505e6e;--atlas-panel:#252e39;--atlas-outline:#71869e;--atlas-paper:#293847;--atlas-paper-stroke:#8ba5bd;--atlas-fold:#3c5064;--atlas-gate:#38312b;--atlas-cluster:#22383c;--atlas-cluster-well:#192c32;--atlas-pod:#2a4a48;--atlas-pod-stroke:#78bfb7;--atlas-pod-mark:#a1d7ce;--atlas-edge:#8ba5bd;--atlas-signal-edge:#bba080;--atlas-data:#93bcff;--atlas-signal:#e8c58a;--atlas-tint:#1b304d}
+@media(prefers-color-scheme:light) {:root:not([data-theme="dark"]) .atlas, :root.atlas:not([data-theme="dark"]) {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#2a557f;--atlas-signal:#78521c;--atlas-tint:#cbd8e4}}
+:root[data-theme="light"] .atlas, :root.atlas[data-theme="light"] {--atlas-bg:#e7e1d5;--atlas-title:#252b33;--atlas-body:#354655;--atlas-note:#465562;--atlas-rule:#9d9b94;--atlas-panel:#d9d7cf;--atlas-outline:#687a86;--atlas-paper:#d2dbe0;--atlas-paper-stroke:#5f788d;--atlas-fold:#bbcbd6;--atlas-gate:#dfd2b9;--atlas-cluster:#cddbd5;--atlas-cluster-well:#dce4dd;--atlas-pod:#b9d0c6;--atlas-pod-stroke:#3f756c;--atlas-pod-mark:#305e55;--atlas-edge:#55758b;--atlas-signal-edge:#85653e;--atlas-data:#2a557f;--atlas-signal:#78521c;--atlas-tint:#cbd8e4}
+
+.atlas { background:var(--atlas-bg); font-family:Arial,Helvetica,sans-serif; }
+.atlas-canvas { fill:var(--atlas-bg); }
+.atlas text { font-family:Arial,Helvetica,sans-serif; }
+.atlas-title { font-size:20px; font-weight:600; fill:var(--atlas-title); }
+.atlas-body { font-size:18px; fill:var(--atlas-body); }
+.atlas-phase { font-size:17px; font-weight:600; fill:var(--atlas-data); }
+.atlas-label { font-size:17px; font-weight:600; fill:var(--atlas-title); }
+.atlas-note { font-size:16px; fill:var(--atlas-note); }
+.atlas-rule { fill:none; stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-panel { fill:var(--atlas-panel); stroke:var(--atlas-outline); stroke-width:1.2; }
+.atlas-paper { fill:var(--atlas-paper); stroke:var(--atlas-paper-stroke); stroke-width:1.2; }
+.atlas-sheet-back { fill:none; stroke:var(--atlas-outline); stroke-width:1; }
+.atlas-fold { fill:var(--atlas-fold); stroke:var(--atlas-paper-stroke); stroke-width:1; }
+.atlas-paper-line { fill:none; stroke:var(--atlas-paper-stroke); stroke-width:2; }
+.atlas-cylinder { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-top { fill:var(--atlas-tint); stroke:var(--atlas-data); stroke-width:1.3; }
+.atlas-cylinder-ring { fill:none; stroke:var(--atlas-data); stroke-width:1; opacity:.55; }
+.atlas-gate { fill:var(--atlas-gate); stroke:var(--atlas-signal); stroke-width:1.4; }
+.atlas-icon { fill:none; stroke:var(--atlas-data); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.atlas-window-rule { stroke:var(--atlas-rule); stroke-width:1; }
+.atlas-cluster { fill:var(--atlas-cluster); stroke:var(--atlas-data); stroke-width:1.5; }
+.atlas-pod { fill:var(--atlas-pod); stroke:var(--atlas-pod-stroke); stroke-width:1; }
+.atlas-pod-mark { fill:none; stroke:var(--atlas-pod-mark); stroke-width:1.5; }
+.atlas-edge { fill:none; stroke:var(--atlas-edge); stroke-width:2; stroke-linejoin:round; }
+.atlas-edge.signal { stroke:var(--atlas-signal-edge); }
+.atlas-trace { fill:none; stroke:var(--atlas-data); stroke-width:2.8; stroke-dasharray:7 93; stroke-linecap:round; animation:atlas-flow 7s linear infinite; }
+.atlas-trace.signal { stroke:var(--atlas-signal); }
+.paused .atlas-trace { animation-play-state:paused !important; }
+@keyframes atlas-flow { from { stroke-dashoffset:100; } to { stroke-dashoffset:0; } }
+@media(prefers-reduced-motion:reduce) { .atlas-trace { animation:none !important; display:none; } }
+</style>
+<defs>
+<symbol id="icon-file" viewBox="0 0 32 32"><path d="M7 3h12l6 6v20H7zM19 3v7h6M12 16h8M12 21h8"/></symbol>
+<symbol id="icon-layers" viewBox="0 0 32 32"><path d="m3 10 13-7 13 7-13 7zM3 17l13 7 13-7M3 24l13 7 13-7"/></symbol>
+<symbol id="icon-branch" viewBox="0 0 32 32"><circle cx="8" cy="6" r="3"/><circle cx="24" cy="6" r="3"/><circle cx="8" cy="26" r="3"/><path d="M8 9v14M24 9v4a7 7 0 0 1-7 7H8"/></symbol>
+<symbol id="icon-cloud" viewBox="0 0 32 32"><path d="M8 25h16a6 6 0 0 0 0-12A9 9 0 0 0 7 11a7 7 0 0 0 1 14z"/></symbol>
+<symbol id="icon-bell" viewBox="0 0 32 32"><path d="M7 22h18l-3-4v-7a6 6 0 0 0-12 0v7zM13 27h6"/></symbol>
+<symbol id="icon-model" viewBox="0 0 32 32"><path d="m4 25 8-11 7 5L28 6M21 6h7v7"/></symbol>
+<symbol id="icon-search" viewBox="0 0 32 32"><circle cx="13" cy="13" r="9"/><path d="m20 20 9 9"/></symbol>
+<symbol id="icon-shield" viewBox="0 0 32 32"><path d="m16 3 11 5v9c0 7-5 10-11 13C10 27 5 24 5 17V8zM10 16l4 4 8-9"/></symbol>
+<marker id="arrow-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-data)" stroke-width="1.5"/></marker>
+<marker id="arrow-signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="m1 1 8 4-8 4" fill="none" stroke="var(--atlas-signal)" stroke-width="1.5"/></marker>
+</defs>
+<rect width="1440" height="912" class="atlas-canvas"/>
+<text class="atlas-phase" x="48" y="52">Ingest and parse</text>
+<path class="atlas-rule" d="M48 68h332"/>
+<text class="atlas-phase" x="484" y="52">Retrieve candidate concepts</text>
+<path class="atlas-rule" d="M484 68h408"/>
+<text class="atlas-phase" x="996" y="52">Select and reuse</text>
+<path class="atlas-rule" d="M996 68h396"/>
+<g aria-hidden="true"><path class="atlas-edge data" d="M214 222V278" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M214 222V278" style="animation-delay:0.0s"/></g>
+<g aria-hidden="true"><path class="atlas-edge signal" d="M214 422V478" marker-end="url(#arrow-signal)"/><path class="atlas-trace signal" pathLength="100" d="M214 422V478" style="animation-delay:0.7s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M214 618V674" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M214 618V674" style="animation-delay:1.4s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M380 730H432V542H484" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M380 730H432V542H484" style="animation-delay:2.0999999999999996s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M688 364V462" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M688 364V462" style="animation-delay:2.0999999999999996s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M892 532H996" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M892 532H996" style="animation-delay:2.8s"/></g>
+<g aria-hidden="true"><path class="atlas-edge data" d="M1194 602V674" marker-end="url(#arrow-data)"/><path class="atlas-trace data" pathLength="100" d="M1194 602V674" style="animation-delay:3.5s"/></g>
+<g id="clinical-documents">
+<path d="M60 88h316v124" class="atlas-sheet-back"/>
+<path d="M54 93h320v124" class="atlas-sheet-back"/>
+<path d="M48 98h300l32 32v92H48Z" class="atlas-paper"/>
+<path d="M348 98v32h32" class="atlas-fold"/>
+<text class="atlas-title" x="72" y="142">Clinical study documents</text>
+<text class="atlas-body" x="72" y="180">Protocols and supporting PDFs</text>
+</g>
+<g id="orchestrator">
+<rect class="atlas-panel" x="48" y="278" width="332" height="144" rx="12"/>
+<use class="atlas-icon" href="#icon-branch" x="72" y="300" width="28" height="28"/>
+<text class="atlas-title" x="116" y="322">Pipeline orchestrator</text>
+<text class="atlas-body" x="72" y="358">Upload event starts a run</text>
+<text class="atlas-body" x="72" y="381">Stage APIs and worker completions</text>
+</g>
+<g id="sections">
+<rect class="atlas-panel" x="48" y="478" width="332" height="140" rx="12"/>
+<use class="atlas-icon" href="#icon-file" x="72" y="500" width="28" height="28"/>
+<path class="atlas-window-rule" d="M48 540h332"/>
+<text class="atlas-title" x="116" y="522">Section extraction</text>
+<text class="atlas-body" x="72" y="572">Outline and page references</text>
+<text class="atlas-body" x="72" y="595">Recover headings and subsections</text>
+</g>
+<g id="passages">
+<path class="atlas-panel" d="M48 674h310l22 22v90H48Z"/>
+<use class="atlas-icon" href="#icon-layers" x="72" y="696" width="28" height="28"/>
+<text class="atlas-title" x="116" y="718">Semantic chunking</text>
+<text class="atlas-body" x="72" y="754">Preserve context within sections</text>
+</g>
+<g id="vocabulary">
+<path class="atlas-cylinder" d="M484 202v138c0 32 408 32 408 0V202Z"/>
+<ellipse cx="688.0" cy="202" rx="204.0" ry="24" class="atlas-cylinder-top"/>
+<path class="atlas-cylinder-ring" d="M484 334c0 32 408 32 408 0"/>
+<text class="atlas-title" x="508" y="256">Clinical vocabulary</text>
+<text class="atlas-body" x="508" y="290">Concept labels and synonyms</text>
+<text class="atlas-body" x="508" y="313">Embedding representations</text>
+</g>
+<g id="ranking">
+<path class="atlas-panel" d="M484 462h386l22 22v118H484Z"/>
+<use class="atlas-icon" href="#icon-search" x="508" y="484" width="28" height="28"/>
+<text class="atlas-title" x="552" y="506">Embedding similarity search</text>
+<text class="atlas-body" x="508" y="542">Compare passage and concept vectors</text>
+<text class="atlas-body" x="508" y="565">Return a ranked shortlist</text>
+</g>
+<g id="matching">
+<path class="atlas-gate" d="M1020 462h348l24 24v92l-24 24H1020l-24-24V486Z"/>
+<use class="atlas-icon" href="#icon-shield" x="1020" y="482" width="28" height="28" style="stroke:var(--atlas-signal)"/>
+<text class="atlas-title" x="1064" y="506">Model-assisted selection</text>
+<text class="atlas-body" x="1020" y="542">Passage context and retrieved candidates</text>
+<text class="atlas-body" x="1020" y="565">Choose a concept from the shortlist</text>
+</g>
+<g id="output">
+<path d="M1008 664h380v112" class="atlas-sheet-back"/>
+<path d="M1002 669h384v112" class="atlas-sheet-back"/>
+<path d="M996 674h364l32 32v80H996Z" class="atlas-paper"/>
+<path d="M1360 674v32h32" class="atlas-fold"/>
+<text class="atlas-title" x="1020" y="718">Structured clinical knowledge</text>
+<text class="atlas-body" x="1020" y="756">Selected concepts and relationships</text>
+</g>
+<path class="atlas-rule" d="M48 826h1344"/>
+<text class="atlas-label" x="48" y="860">Document structure</text>
+<text class="atlas-note" x="48" y="888">Sections anchor each passage</text>
+<text class="atlas-label" x="484" y="860">Vocabulary alignment</text>
+<text class="atlas-note" x="484" y="888">Compare activities with procedure codes</text>
+<text class="atlas-label" x="996" y="860">Protocol authoring</text>
+<text class="atlas-note" x="996" y="888">Find relevant material by topic and section</text>
+</svg>
