@@ -677,3 +677,53 @@ ul { list-style: none; padding: 0; }
 @media (max-width: 380px) { .thesis-scope > div { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; } }
 
 @media (max-width: 360px) { .hero-portrait { flex-basis: 112px; width: 112px; height: 140px; } .hero-profile { gap: 16px; } }
+
+/* ---- ML motifs: skill icons and hero sketches ----
+   Motion follows the page controls: the hero pauses with its
+   [data-motion] state, and journey sections pause when off screen. */
+.skill-h { display: flex; align-items: center; gap: 10px; }
+.ml-ico { width: 22px; height: 22px; flex: 0 0 22px; color: var(--accent); overflow: visible; }
+.ml-ico * { vector-effect: non-scaling-stroke; }
+.ml-ico-net circle { fill: var(--accent-d); }
+.ml-ico-net circle:nth-of-type(odd) { animation: ml-pulse 2.4s ease-in-out infinite; }
+.ml-ico-net circle:nth-of-type(even) { animation: ml-pulse 2.4s ease-in-out infinite .8s; }
+.ml-ico-cycle { animation: ml-spin 6s linear infinite; transform-origin: 12px 12px; }
+.ml-ico-bars rect { fill: var(--accent-d); stroke: none; transform-box: fill-box; transform-origin: bottom; animation: ml-bar 2.2s ease-in-out infinite; }
+.ml-ico-bars .b2 { animation-delay: .3s; }
+.ml-ico-bars .b3 { animation-delay: .6s; }
+.ml-ico-code path { animation: ml-code 2.6s ease-in-out infinite; }
+.ml-ico-code path:nth-child(2) { animation-delay: .4s; }
+.journey-section[data-motion="paused"] .ml-ico * , .journey-section[data-motion="paused"] .ml-ico { animation-play-state: paused; }
+.journey-section[data-motion="running"] .ml-ico * { animation-play-state: running; }
+@keyframes ml-pulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes ml-spin { to { transform: rotate(360deg); } }
+@keyframes ml-bar { 0%,100% { transform: scaleY(.45); } 50% { transform: scaleY(1); } }
+@keyframes ml-code { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+.hero-float { position: absolute; inset: 0; z-index: 0; pointer-events: none; color: var(--accent); }
+.hf { position: absolute; opacity: .32; overflow: visible; }
+.hf path, .hf circle, .hf rect, .hf text { stroke: currentColor; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.hf text { fill: currentColor; stroke: none; font-family: var(--fm); font-size: 12px; }
+.hf-loss { width: 170px; top: 96px; right: 4%; }
+.hf-curve { stroke-dasharray: 100; stroke-dashoffset: 100; animation: ml-draw 6s ease-in-out infinite; }
+.hf-axis { opacity: .6; }
+.hf-dot { fill: var(--accent); stroke: none; }
+.hf-scatter { width: 120px; bottom: 28px; left: 2%; }
+.hf-p { fill: var(--accent); stroke: none; animation: ml-bob 4s ease-in-out infinite; }
+.hf-p.p2 { animation-delay: .5s; } .hf-p.p3 { animation-delay: 1s; } .hf-p.p4 { animation-delay: 1.5s; } .hf-p.p5 { animation-delay: 2s; } .hf-p.p6 { animation-delay: 2.5s; }
+.hf-fit { stroke-dasharray: 4 4; opacity: .6; }
+.hf-bowl { width: 150px; top: 22px; left: 52%; }
+.hf-ball { fill: var(--accent); stroke: none; }
+.hf-tokens { width: 150px; bottom: 96px; right: 6%; }
+.hf-chip { fill: var(--accent-d); }
+.hf-tok { fill: var(--accent-d); stroke: none; animation: ml-token 3.6s ease-in-out infinite; }
+.hf-tok.t2 { animation-delay: .6s; } .hf-tok.t3 { animation-delay: 1.2s; }
+@keyframes ml-draw { 0% { stroke-dashoffset: 100; } 50%,100% { stroke-dashoffset: 0; } }
+@keyframes ml-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ml-token { 0%,100% { transform: translateX(0); opacity: .5; } 50% { transform: translateX(6px); opacity: 1; } }
+.hero[data-motion="paused"] .hf *, .hero[data-motion="paused"] .hf { animation-play-state: paused; }
+@media (max-width: 760px) { .hero-float { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ml-ico *, .ml-ico, .hf *, .hf { animation: none !important; }
+  .hf-curve { stroke-dashoffset: 0; }
+}
