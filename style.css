@@ -729,7 +729,7 @@ ul { list-style: none; padding: 0; }
 }
 
 /* ---- Contact robot: a small line-art bot that blinks, pulses and waves ---- */
-.bot { width: 96px; height: 104px; color: var(--accent); display: block; margin-bottom: 12px; overflow: visible; }
+.bot { width: 48px; height: 52px; color: var(--accent); display: block; margin-bottom: 12px; overflow: visible; }
 .bot-light { fill: var(--accent); animation: bot-pulse 2s ease-in-out infinite; }
 .bot-head { fill: var(--accent-d); }
 .bot-eye { transform-box: fill-box; transform-origin: center; animation: bot-blink 4.5s infinite; }
@@ -744,4 +744,4 @@ ul { list-style: none; padding: 0; }
 @keyframes bot-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
 @keyframes bot-wave-fast { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-30deg); } }
 @media (prefers-reduced-motion: reduce) { .bot * { animation: none !important; } }
-.contact-intro .bot { width: 96px !important; height: 104px !important; max-width: 96px; }
+.contact-intro .bot { width: 48px !important; height: 52px !important; max-width: 48px; }
