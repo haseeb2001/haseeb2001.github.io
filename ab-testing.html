@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experimentation case study · Muhammad Haseeb</title>
+<meta name="description" content="A/B test case study: signup redesign, power analysis, guardrails and peeking. Simulated data with a known ground truth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>(()=>{let saved;try{saved=localStorage.getItem('mh-theme')}catch{}const manual=saved==='dark'||saved==='light';document.documentElement.dataset.theme=manual?saved:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'})()</script>
+<link rel="stylesheet" href="style.css">
+<style>
+  .cs-page { max-width: 1040px; margin: 0 auto; padding: 56px 20px 96px; }
+  table { display: block; overflow-x: auto; }
+  .cs-page h1 { font-family: var(--fh); font-weight: 400; font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1; margin: 8px 0 16px; }
+  .cs-page h1 em { color: var(--accent); font-style: italic; }
+  .cs-page h2 { font-family: var(--fh); font-weight: 400; font-size: 1.6rem; margin: 48px 0 12px; }
+  .cs-page p, .cs-page li { color: var(--fg-m); line-height: 1.65; max-width: 70ch; }
+  .cs-page strong { color: var(--fg); }
+  .back { font-size: .875rem; color: var(--accent); text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  .eyebrow { font-family: var(--fm); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-sub); }
+  .notice { border-left: 3px solid var(--accent); padding: 12px 16px; background: var(--accent-d); border-radius: 4px; margin: 20px 0; }
+  .notice p { margin: 0; color: var(--fg); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .95rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-s); }
+  th { color: var(--fg-sub); font-weight: 500; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+  td { color: var(--fg-m); }
+  figure { margin: 24px 0; }
+  figure img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-s); background: var(--bg-e); }
+  figcaption { font-size: .85rem; color: var(--fg-sub); margin-top: 8px; }
+  pre { background: var(--bg-s); border: 1px solid var(--border-s); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font-family: var(--fm); font-size: .85rem; color: var(--fg); }
+
+  /* Hero with a small neural-network animation */
+  .cs-hero { position: relative; overflow: hidden; border: 1px solid var(--border-s); border-radius: 10px; padding: 32px; background: var(--bg-s); }
+  .cs-hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
+  .net { width: 100%; height: auto; }
+  .net line { stroke: var(--border); stroke-width: 1; }
+  .net circle { fill: var(--bg-e); stroke: var(--fg-sub); stroke-width: 1.2; }
+  .net circle.hot { fill: var(--accent); stroke: var(--accent); animation: pulse 2.8s ease-in-out infinite; }
+  .net circle.hot:nth-of-type(3n) { animation-delay: .6s; }
+  .net circle.hot:nth-of-type(4n) { animation-delay: 1.4s; }
+  .net line.flow { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 6 14; animation: flow 3.5s linear infinite; opacity: .7; }
+  @keyframes pulse { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
+  @keyframes flow { to { stroke-dashoffset: -80; } }
+
+  /* Animated A/B bars */
+  .ab-bars { display: grid; gap: 14px; }
+  .ab-row { display: grid; grid-template-columns: 90px 1fr 64px; gap: 12px; align-items: center; font-size: .9rem; color: var(--fg-m); }
+  .ab-track { height: 14px; background: var(--bg-e); border-radius: 7px; overflow: hidden; }
+  .ab-fill { height: 100%; width: 0; border-radius: 7px; background: var(--fg-sub); transition: width 1.4s cubic-bezier(.2,.7,.2,1); }
+  .ab-fill.treat { background: var(--accent); }
+  .ab-val { font-family: var(--fm); color: var(--fg); text-align: right; }
+  .ab-caption { font-size: .8rem; color: var(--fg-sub); margin-top: 6px; }
+
+  /* Training-curve decoration in the design section */
+  .curve { width: 100%; height: auto; margin: 12px 0 0; }
+  .curve path.line { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 3s ease-out forwards; }
+  .curve path.base { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 6; }
+  .curve text { fill: var(--fg-sub); font-family: var(--fm); font-size: 11px; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .fade-in { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.in { opacity: 1; transform: none; }
+
+  .code-link { font-family: var(--fm); font-size: .85rem; }
+
+  @media (max-width: 760px) {
+    .cs-hero-grid { grid-template-columns: 1fr; }
+    .cs-hero { padding: 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .net circle.hot, .net line.flow, .curve path.line { animation: none; }
+    .curve path.line { stroke-dashoffset: 0; }
+    .ab-fill { transition: none; }
+    .fade-in { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="cs-page w" id="main">
+  <a class="back" href="index.html#work">← Back to portfolio</a>
+
+  <section class="cs-hero" aria-labelledby="title">
+    <div class="cs-hero-grid">
+      <div>
+        <p class="eyebrow">Experimentation · Product analytics</p>
+        <h1 id="title">Does a shorter signup flow <em>convert better?</em></h1>
+        <p>A controlled A/B test of a redesigned signup flow. The question was whether the redesign lifts conversion by at least one percentage point without hurting retention.</p>
+        <p class="notice"><strong>Simulated data.</strong> The experiment is generated with a known ground truth so every conclusion can be checked. The steps are the ones I would run on a live test.</p>
+      </div>
+      <div aria-hidden="true">
+        <svg class="net" viewBox="0 0 320 240" fill="none">
+          <!-- layers: 3 inputs, 4 hidden, 2 outputs -->
+          <g>
+            <line x1="40" y1="50" x2="120" y2="40"/><line x1="40" y1="50" x2="120" y2="100"/><line x1="40" y1="50" x2="120" y2="160"/><line x1="40" y1="50" x2="120" y2="210"/>
+            <line x1="40" y1="120" x2="120" y2="40"/><line x1="40" y1="120" x2="120" y2="100"/><line x1="40" y1="120" x2="120" y2="160"/><line x1="40" y1="120" x2="120" y2="210"/>
+            <line x1="40" y1="190" x2="120" y2="40"/><line x1="40" y1="190" x2="120" y2="100"/><line x1="40" y1="190" x2="120" y2="160"/><line x1="40" y1="190" x2="120" y2="210"/>
+            <line x1="120" y1="40" x2="200" y2="90" class="flow"/><line x1="120" y1="100" x2="200" y2="90"/><line x1="120" y1="160" x2="200" y2="150"/><line x1="120" y1="210" x2="200" y2="150"/>
+            <line x1="200" y1="90" x2="290" y2="120" class="flow"/><line x1="200" y1="150" x2="290" y2="120"/>
+          </g>
+          <g>
+            <circle cx="40" cy="50" r="8"/><circle cx="40" cy="120" r="8" class="hot"/><circle cx="40" cy="190" r="8"/>
+            <circle cx="120" cy="40" r="9" class="hot"/><circle cx="120" cy="100" r="9"/><circle cx="120" cy="160" r="9" class="hot"/><circle cx="120" cy="210" r="9"/>
+            <circle cx="200" cy="90" r="10" class="hot"/><circle cx="200" cy="150" r="10"/>
+            <circle cx="290" cy="120" r="12" class="hot"/>
+          </g>
+        </svg>
+        <div class="ab-bars" style="margin-top:12px" id="abBars">
+          <div class="ab-row"><span>Control</span><div class="ab-track"><div class="ab-fill" data-w="12.03"></div></div><span class="ab-val">12.0%</span></div>
+          <div class="ab-row"><span>Treatment</span><div class="ab-track"><div class="ab-fill treat" data-w="12.84"></div></div><span class="ab-val">12.8%</span></div>
+          <p class="ab-caption">Signup conversion, 60,000 simulated users. Lift +0.8 pp (95% CI +0.3 to +1.3).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2>1. Design, decided before the test</h2>
+  <p>The sample size and decision rule were fixed before any data arrived. That stops the result from shaping the rule.</p>
+  <table>
+    <thead><tr><th>Item</th><th>Value</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Primary metric</td><td>Signup conversion</td><td>Directly tied to the change</td></tr>
+      <tr><td>Baseline</td><td>12.0%</td><td>Assumed for this scenario</td></tr>
+      <tr><td>Minimum detectable effect</td><td>+1.0 pp</td><td>Smallest lift that justifies the engineering cost</td></tr>
+      <tr><td>Significance / power</td><td>α = 0.05 (two-sided) / 80%</td><td>Standard</td></tr>
+      <tr><td>Users per arm</td><td><strong>17,169</strong></td><td>Two-proportion sample-size formula</td></tr>
+      <tr><td>Guardrail</td><td>7-day retention among signups</td><td>A shorter flow must not bring in lower-quality users</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Decision rule:</strong> ship only if the lift is significant, the point estimate is at least the MDE, the randomisation check passes, and the guardrail is non-inferior within 1 pp.</p>
+  <div class="curve-wrap fade-in" aria-hidden="true">
+    <svg class="curve" viewBox="0 0 600 150" preserveAspectRatio="none">
+      <path class="base" d="M30 20 V120 H580"/>
+      <path class="line" pathLength="600" d="M30 20 C 80 90, 120 40, 170 70 S 260 95, 320 88 S 430 110, 580 116"/>
+      <text x="36" y="14">Signup rate</text>
+      <text x="520" y="140">Time →</text>
+    </svg>
+    <figcaption>Decorative: a learning-curve shape to echo the model-training theme of my work.</figcaption>
+  </div>
+
+  <h2>2. Randomisation check</h2>
+  <p>Control had 29,848 users and treatment had 30,152. A chi-square test for sample ratio mismatch gave p = 0.21, so the split is consistent with 50/50 and the test is valid.</p>
+
+  <h2>3. Primary result</h2>
+  <table>
+    <thead><tr><th></th><th>Control</th><th>Treatment</th><th>Difference</th></tr></thead>
+    <tbody>
+      <tr><td>Signup conversion</td><td>12.03%</td><td>12.84%</td><td><strong>+0.81 pp</strong> (95% CI +0.28 to +1.34)</td></tr>
+      <tr><td>Relative lift</td><td></td><td></td><td>+6.7%</td></tr>
+      <tr><td>p-value</td><td></td><td></td><td>0.003</td></tr>
+    </tbody>
+  </table>
+  <figure class="fade-in">
+    <img src="assets/ab-test/conversion_by_arm.png" alt="Bar chart of signup conversion for control (12.0%) and treatment (12.8%) with 95% confidence intervals" loading="lazy">
+    <figcaption>Conversion by arm with 95% Wilson intervals.</figcaption>
+  </figure>
+  <p>The lift is significant, but the estimate is below the +1.0 pp MDE, so the pre-registered rule does not ship it.</p>
+
+  <h2>4. Guardrail: retention</h2>
+  <p>7-day retention among signups was 42.7% in control and 42.3% in treatment, a difference of −0.3 pp (95% CI −2.6 to +1.9).</p>
+  <p>The interval is too wide to show the treatment is no worse than control by more than 1 pp. With about 3,500 to 3,900 signups per arm, this guardrail has low power. <strong>Retention is unknown, not confirmed safe.</strong></p>
+
+  <h2>5. Segments</h2>
+  <figure class="fade-in">
+    <img src="assets/ab-test/lift_by_segment.png" alt="Forest plot of lift by platform and user type with 95% intervals; the Android segment is the only one that survives correction" loading="lazy">
+    <figcaption>Lift by segment, 95% CI, against the +1.0 pp MDE.</figcaption>
+  </figure>
+  <table>
+    <thead><tr><th>Segment</th><th>Lift (pp)</th><th>p (raw)</th><th>p (Holm)</th></tr></thead>
+    <tbody>
+      <tr><td>Android</td><td>+1.76</td><td>0.004</td><td><strong>0.019</strong></td></tr>
+      <tr><td>iOS</td><td>+0.48</td><td>0.37</td><td>0.37</td></tr>
+      <tr><td>Web</td><td>+0.61</td><td>0.09</td><td>0.18</td></tr>
+      <tr><td>New users</td><td>+0.66</td><td>0.06</td><td>0.18</td></tr>
+      <tr><td>Returning users</td><td>+1.04</td><td>0.01</td><td>0.06</td></tr>
+    </tbody>
+  </table>
+  <p>Android is the only segment that survives correction for the five comparisons. I would treat it as a hypothesis for a follow-up test, not as a finding to act on.</p>
+
+  <h2>6. Why I did not check the results every day</h2>
+  <p>Stopping as soon as p &lt; 0.05 inflates false positives. I ran 600 A/A simulations, where both arms are identical.</p>
+  <figure class="fade-in">
+    <img src="assets/ab-test/peeking_false_positives.png" alt="Bar chart: false positive rate is about 4% with one final look and about 24% when checked 20 times" loading="lazy">
+    <figcaption>Checking 20 times produced a false positive 24% of the time. A single final look stayed near 4%.</figcaption>
+  </figure>
+
+  <h2>7. Recommendation</h2>
+  <ol>
+    <li><strong>Do not ship yet.</strong> The primary estimate is below the MDE, and the guardrail is inconclusive.</li>
+    <li><strong>Pick a guardrail that can be measured in the time available.</strong> Measuring a 0.35 pp retention difference needs about 150,000 users per arm. A 24-hour activation metric would detect problems much sooner.</li>
+    <li><strong>If the team needs an answer sooner,</strong> run a follow-up test on Android with the MDE set to +1 pp.</li>
+  </ol>
+
+  <h2>Limitations</h2>
+  <ul>
+    <li>The data is simulated, so this shows the method and the reasoning, not a real product result.</li>
+    <li>The simulation included a real effect of about +1.2 pp overall. The test estimated +0.8 pp. That gap is sampling error, and it is a reminder that one significant test can under- or over-state the effect.</li>
+    <li>Segment results were corrected for five comparisons only. A real analysis would pre-register the segments.</li>
+  </ul>
+
+  <h2>Reproduce</h2>
+  <p>The analysis script is <a class="code-link" href="assets/ab-test/analysis.py">analysis.py</a>. It generates the data, runs the tests and writes the charts.</p>
+<pre>pip install numpy pandas scipy statsmodels matplotlib
+python analysis.py</pre>
+</main>
+
+<script>
+  // Animate the A/B bars once they are on screen; skip under reduced motion.
+  (() => {
+    const fills = document.querySelectorAll('#abBars .ab-fill');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const go = () => fills.forEach(f => f.style.width = f.dataset.w + '%');
+    if (reduce || !('IntersectionObserver' in window)) { go(); return; }
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { go(); io.disconnect(); }
+    }, { threshold: 0.4 });
+    io.observe(document.getElementById('abBars'));
+  })();
+  // Fade figures in as they scroll into view.
+  (() => {
+    const items = document.querySelectorAll('.fade-in');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { items.forEach(i => i.classList.add('in')); return; }
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+    items.forEach(i => io.observe(i));
+  })();
+</script>
+</body>
+</html>
