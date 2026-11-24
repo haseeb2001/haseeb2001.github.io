@@ -80,7 +80,7 @@
     </div>
     <aside class="hero-evidence" aria-label="Selected production results and research">
       <div class="hero-profile">
-        <span class="hero-portrait"><img src="assets/photo-portrait-480.jpg" alt="Muhammad Haseeb" width="112" height="140" fetchpriority="high" decoding="async"></span>
+        <span class="hero-portrait"><img src="assets/photo-portrait-480.jpg" alt="Muhammad Haseeb" width="176" height="220" fetchpriority="high" decoding="async"></span>
         <div><h2>Production work.<br>Research depth.</h2><p>ML engineering &amp; applied research</p></div>
       </div>
       <div class="hero-projects">
@@ -945,6 +945,28 @@
 </footer>
 
 <script src="assets/portfolio.js" defer></script>
+<script>
+// Portrait: tilts toward the cursor and lights up under it. Desktop with a mouse only.
+(() => {
+  const el = document.querySelector('.hero-portrait');
+  if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return;
+  const max = 12;
+  el.addEventListener('pointerenter', () => el.style.setProperty('--glow', 1));
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    el.style.setProperty('--ry', ((x - 0.5) * max).toFixed(2) + 'deg');
+    el.style.setProperty('--rx', ((0.5 - y) * max).toFixed(2) + 'deg');
+    el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+    el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+  });
+  el.addEventListener('pointerleave', () => {
+    el.style.setProperty('--rx', '0deg');
+    el.style.setProperty('--ry', '0deg');
+    el.style.setProperty('--glow', 0);
+  });
+})();
+</script>
 <script>
   // Keep the mobile summary visible; wide layouts lead with the animation.
   const wideArchitecture = matchMedia('(min-width: 1200px)');
