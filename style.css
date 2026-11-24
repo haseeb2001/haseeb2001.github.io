@@ -744,3 +744,4 @@ ul { list-style: none; padding: 0; }
 @keyframes bot-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-18deg); } }
 @keyframes bot-wave-fast { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-30deg); } }
 @media (prefers-reduced-motion: reduce) { .bot * { animation: none !important; } }
+.contact-intro .bot { width: 96px !important; height: 104px !important; max-width: 96px; }
